@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dmz>
+<plugin-list>
+   <plugin name="dmzArchiveModuleBasic" scope="archive-module"/>
+   <plugin name="dmzArchivePluginAutoLoad"/>
+   <plugin name="dmzArchivePluginAutoSave"/>
+   <plugin name="dmzArchivePluginObject"/>
+   <plugin name="dmzArchivePluginUndo"/>
+   <plugin name="dmzObjectModuleBasic"/>
+   <plugin name="dmzObjectPluginUndo"/>
+   <plugin name="dmzObjectPluginCleanup"/>
+   <plugin name="dmzRenderModulePickBasic"/>
+   <plugin name="dmzQtPluginList"/>
+<!--
+   <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
+   <plugin name="dmzPluginMsgDump"/>
+   <plugin name="dmzObjectPluginDump"/>
+   <plugin name="dmzPluginUndoDump"/>
+-->
+</plugin-list>
+<archive-module>
+   <archive version="0"/>
+</archive-module>
+</dmz>

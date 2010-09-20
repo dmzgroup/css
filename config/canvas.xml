@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dmz>
+<plugin-list>
+   <plugin name="dmzQtModuleMainWindowBasic" scope="main-window"/>
+   <plugin name="dmzQtModuleCanvasBasic" unique="canvas"/>
+   <plugin name="dmzQtPluginCanvasObject" unique="canvas-object"/>
+   <plugin name="dmzQtPluginCanvasLink" unique="canvas-link"/>
+   <plugin name="dmzQtPluginVersion"/>
+</plugin-list>
+<main-window>
+   <corners>
+      <top right="true" left="true"/>
+      <bottom right="true" left="true"/>
+   </corners>
+   <window title="DMZ: Cyber Security Simulator"/>
+   <central-widget name="canvas"/>
+   <menu-bar>
+      <menu text="&amp;File"/>
+<!--
+      <menu text="&amp;Edit"/>
+-->
+      <menu text="&amp;Window"/>
+      <menu text="&amp;Help"/>
+   </menu-bar>
+   <dock-windows>
+   </dock-windows>
+</main-window>
+<canvas>
+   <canvas opengl="false" antialiasing="true" textantialiasing="true">
+      <zoom default="1.0"/>
+   </canvas>
+   <scene>
+      <background grid="true"/>
+<!--
+      <min x="-300" y="-300"/>
+      <max x="300" y="300"/>
+-->
+   </scene>
+   <scrollbars value="false"/>
+</canvas>
+<canvas-object>
+   <plugin-list>
+      <plugin name="dmzQtPluginCanvasObjectBasic" unique="canvas-object-basic"/>
+   </plugin-list>
+   <canvas-object-basic>
+      <defaults zValue="1" itemIgnoresTransformations="false"/>
+   </canvas-object-basic>
+</canvas-object>
+<canvas-link>
+   <pen-width value="1"/>
+</canvas-link>
+</dmz>
