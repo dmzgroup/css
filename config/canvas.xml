@@ -5,6 +5,7 @@
    <plugin name="dmzQtModuleCanvasBasic" unique="canvas"/>
    <plugin name="dmzQtPluginCanvasObject" unique="canvas-object"/>
    <plugin name="dmzQtPluginCanvasLink" unique="canvas-link"/>
+   <plugin name="dmzQtPluginCanvasZoomPan" unique="canvas-zoom"/>
    <plugin name="dmzQtPluginVersion"/>
 </plugin-list>
 <main-window>
