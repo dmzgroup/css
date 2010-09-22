@@ -7,6 +7,7 @@
    <plugin name="dmzQtPluginCanvasLink" unique="canvas-link"/>
    <plugin name="dmzQtPluginCanvasZoomPan" unique="canvas-zoom"/>
    <plugin name="dmzQtPluginVersion"/>
+   <plugin name="dmzQtPluginTypePalletTool"/>
 </plugin-list>
 <main-window>
    <corners>
@@ -32,10 +33,8 @@
    </canvas>
    <scene>
       <background grid="true"/>
-<!--
       <min x="-300" y="-300"/>
       <max x="300" y="300"/>
--->
    </scene>
    <scrollbars value="false"/>
 </canvas>
