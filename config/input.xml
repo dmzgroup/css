@@ -1,8 +1,16 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <dmz>
 <plugin-list>
    <plugin name="dmzInputModuleBasic"/>
-   <plugin name="dmzInputPluginKeyEventToMessage"/>
+   <plugin name="dmzInputPluginKeyEventToMessage" unique="key-events"/>
+   <plugin name="dmzInputPluginChannelSwitch" scope="tool-name"/>
+   <plugin name="dmzInputPluginChannelRules" scope="tool-name"/>
+   <plugin name="dmzInputPluginChannelMessage" scope="tool-name"/>
+   <plugin name="dmzQtPluginButtonToChannel" scope="tool-name"/>
+   <plugin name="dmzInputPluginMouseEventToMessage" unique="mouse-move-event"/>
+   <plugin name="dmzInputPluginMouseEventToMessage" unique="move-event"/>
+   <plugin name="dmzInputPluginMouseEventToMessage" unique="link-event"/>
+   <plugin name="dmzInputPluginMouseEventToMessage" unique="delete-event"/>
 </plugin-list>
 <dmzInputPluginKeyEventToMessage>
    <channel>
@@ -17,4 +25,224 @@
       </converter>
    </channel>
 </dmzInputPluginKeyEventToMessage>
+<main-window>
+   <dock-windows>
+      <group area="top">
+         <widget
+            name="dmzQtPluginButtonToChannel"
+            title="Tools"
+            visible="false"
+            floating="true"
+         >
+         </widget>
+      </group>
+   </dock-windows>
+</main-window>
+<tool-name>
+   <layout vertical="true"/>
+   <channel name="move-tool" message="Update_Tool_Name" isect="false"> 
+      <attribute type="string" name="String">
+         <element value="Move"/>
+      </attribute>
+      <toolButton autoRaise="True">
+         <button>
+            <iconSize width="32" height="32"/>
+         </button>
+         <action text="Move" checkable="True" checked="True">
+            <icon>
+               <image file="assets/icon_move.png"/>
+            </icon>
+         </action>
+      </toolButton>
+   </channel>
+   <channel name="link-tool" message="Update_Tool_Name" isect="false"> 
+      <attribute type="string" name="String">
+         <element value="Link"/>
+      </attribute>
+      <toolButton autoRaise="True">
+         <button>
+            <iconSize width="32" height="32"/>
+         </button>
+         <action text="Link" checkable="True" checked="True">
+            <icon>
+               <image file="assets/icon_link.png"/>
+            </icon>
+         </action>
+      </toolButton>
+   </channel>
+   <channel name="delete-tool" message="Update_Tool_Name"> 
+      <attribute type="string" name="String">
+         <element value="Delete"/>
+      </attribute>
+      <toolButton autoRaise="True">
+         <button>
+            <iconSize width="32" height="32"/>
+         </button>
+         <action text="Delete" checkable="True" checked="True">
+            <icon>
+               <image file="assets/icon_delete.png"/>
+            </icon>
+         </action>
+      </toolButton>
+   </channel>
+</tool-name>
+<mouse-move-event>
+   <input>
+      <source name="canvas"/>
+      <channel name="move-tool"/>
+      <channel name="link-tool"/>
+      <channel name="delete-tool"/>
+   </input>
+   <target name="highlight"/>
+   <deactivate message="Object_Highlight_Deactivate_Message"/>
+   <converter start="first">
+      <state name="first" type="basic">
+         <condition
+               action="moved"
+               result="position"
+               next="first"
+               message="Mouse_Move_Message"
+         >
+            <attribute type="object" name="handle"/>
+         </condition>
+      </state>
+   </converter>
+</mouse-move-event>
+<move-event>
+   <input>
+      <source name="canvas"/>
+      <channel name="move-tool"/>
+   </input>
+   <converter start="first">
+      <state name="first" type="basic">
+         <condition
+               button="1"
+               action="pressed"
+               result="object"
+               message="Select_Move_Object_Message"
+               next="default_test">
+            <attribute type="position" name="position"/>
+            <attribute type="object" name="object"/>
+         </condition>
+      </state>
+      <state name="default_test" type="basic">
+         <condition button="1" action="released" message="Unselect_Move_Object_Message"/>
+         <condition
+               button="1"
+               action="released"
+               message="Edit_Object_Attributes_Message"
+               next="first">
+            <attribute type="object" name="object"/>
+         </condition>
+         <condition action="moved" message="Move_Selected_Object_Message" next="move_object">
+            <attribute type="position" name="position"/>
+         </condition>
+      </state>
+      <state name="move_object" type="basic">
+         <condition
+               button="1"
+               action="released"
+               message="Unselect_Move_Object_Message"
+               next="first">
+         </condition>
+         <condition action="moved" message="Move_Selected_Object_Message">
+            <attribute type="position" name="position"/>
+         </condition>
+      </state>
+   </converter>
+</move-event>
+<link-event>
+   <input>
+      <channel name="link-tool"/>
+      <source name="canvas"/>
+   </input>
+   <target name="link"/>
+   <deactivate message="Failed_Link_Objects_Message"/>
+   <converter type="2D">
+      <state name="start" type="basic">
+         <condition
+               button="1"
+               action="pressed"
+               result="object"
+               message="First_Link_Object_Message"
+               next="update_test">
+            <attribute type="object" name="object"/>
+         </condition>
+      </state>
+      <state name="update_test" type="basic">
+         <condition
+               button="1"
+               action="released"
+               message="Update_Link_Position_Message"
+               next="update_two_clicks">
+            <attribute type="position" name="position"/>
+         </condition>
+         <condition
+               button="1"
+               action="moved"
+               message="Update_Link_Position_Message"
+               next="update_drag">
+            <attribute type="position" name="position"/>
+         </condition>
+      </state>
+      <state name="update_two_clicks" type="basic">
+         <condition
+               button="1"
+               action="released"
+               result="object"
+               message="Second_Link_Object_Message"
+               next="start">
+            <attribute type="object" name="object"/>
+         </condition>
+         <condition
+               button="1"
+               action="released"
+               message="Failed_Link_Objects_Message"
+               next="start"/>
+         <condition
+               action="moved"
+               message="Update_Link_Position_Message">
+            <attribute type="position" name="position"/>
+         </condition>
+      </state>
+      <state name="update_drag" type="basic">
+         <condition
+               button="1"
+               action="released"
+               result="object"
+               message="Second_Link_Object_Message"
+               next="start">
+            <attribute type="object" name="object"/>
+         </condition>
+         <condition
+               button="1"
+               action="released"
+               message="Failed_Link_Objects_Message"
+               next="start"/>
+         <condition button="1" action="moved" message="Update_Link_Position_Message">
+            <attribute type="position" name="position"/>
+         </condition>
+      </state>
+   </converter>
+</link-event>
+<delete-event>
+   <input>
+      <source name="canvas"/>
+      <channel name="delete-tool"/>
+   </input>
+   <target name="delete"/>
+   <converter start="first">
+      <state name="first" type="basic">
+         <condition
+               button="1"
+               result="object"
+               action="released"
+               message="Object_Delete_Message"
+               next="first"
+         >
+            <attribute type="object" name="handle"/>
+         </condition>
+      </state>
+   </converter>
+</delete-event>
 </dmz>

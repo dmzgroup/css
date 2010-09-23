@@ -10,6 +10,10 @@
 <javascript>
    <path value="./scripts"/>
    <path value="../js/scripts"/>
+   <instance name="create"/>
+   <instance name="move"/>
+   <instance name="link"/>
+   <instance name="delete"/>
 </javascript>
 </dmz>
 

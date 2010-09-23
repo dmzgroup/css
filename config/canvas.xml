@@ -53,7 +53,8 @@
    </canvas-object-basic>
 </canvas-object>
 <canvas-link>
-   <pen-width value="1"/>
+   <link name="Network Link"/>
+   <pen-width value="2"/>
 </canvas-link>
 <canvas-pick>
    <order x="0" y="2" z="1"/>

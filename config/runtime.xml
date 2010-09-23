@@ -4,8 +4,28 @@
    <time>
       <frequency value="60.0"/>
    </time>
+   <message name="Update_Tool_Name" monostate="true"/>
+   <object-type name="Tool"/>
+   <object-type name="Tool Link Node" parent="Tool">
+      <canvas-object/>
+   </object-type>
    <object-type name="Computer">
       <render/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="node">
+                  <translate x="-10" y="-10"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Server" parent="Computer">
       <render/>
@@ -24,6 +44,21 @@
    </object-type>
    <object-type name="Network Node">
       <render/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="node">
+                  <translate x="-10" y="-10"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Fire Wall" parent="Network Node">
       <render/>
