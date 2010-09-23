@@ -4,5 +4,38 @@
    <time>
       <frequency value="60.0"/>
    </time>
+   <object-type name="Computer">
+      <render/>
+   </object-type>
+   <object-type name="Server" parent="Computer">
+      <render/>
+   </object-type>
+   <object-type name="Work Station" parent="Computer">
+      <render/>
+   </object-type>
+   <object-type name="Laptop" parent="Computer">
+      <render/>
+   </object-type>
+   <object-type name="Tablet" parent="Computer">
+      <render/>
+   </object-type>
+   <object-type name="Smart Phone" parent="Computer">
+      <render/>
+   </object-type>
+   <object-type name="Network Node">
+      <render/>
+   </object-type>
+   <object-type name="Fire Wall" parent="Network Node">
+      <render/>
+   </object-type>
+   <object-type name="Router" parent="Network Node">
+      <render/>
+   </object-type>
+   <object-type name="Wireless Base Station" parent="Network Node">
+      <render/>
+   </object-type>
+   <object-type name="Malware Mimic">
+      <render/>
+   </object-type>
 </runtime>
 </dmz>

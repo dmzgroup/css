@@ -3,11 +3,14 @@
 <plugin-list>
    <plugin name="dmzQtModuleMainWindowBasic" scope="main-window"/>
    <plugin name="dmzQtModuleCanvasBasic" unique="canvas"/>
+   <plugin name="dmzQtModuleDropEventToMessage" unique="drop-event"/>
    <plugin name="dmzQtPluginCanvasObject" unique="canvas-object"/>
    <plugin name="dmzQtPluginCanvasLink" unique="canvas-link"/>
    <plugin name="dmzQtPluginCanvasZoomPan" unique="canvas-zoom"/>
    <plugin name="dmzQtPluginVersion"/>
    <plugin name="dmzQtPluginTypePalletTool"/>
+   <plugin name="dmzRenderModulePickBasic"/>
+   <plugin name="dmzQtPluginRenderPickCanvas" unique="canvas-pick"/>
 </plugin-list>
 <main-window>
    <corners>
@@ -38,6 +41,9 @@
    </scene>
    <scrollbars value="false"/>
 </canvas>
+<drop-event>
+   <message name="Drop_Create_Message"/>
+</drop-event>
 <canvas-object>
    <plugin-list>
       <plugin name="dmzQtPluginCanvasObjectBasic" unique="canvas-object-basic"/>
@@ -49,4 +55,11 @@
 <canvas-link>
    <pen-width value="1"/>
 </canvas-link>
+<canvas-pick>
+   <order x="0" y="2" z="1"/>
+   <source name="canvas"/>
+   <module>
+      <canvas name="canvas"/>
+   </module>
+</canvas-pick>
 </dmz>

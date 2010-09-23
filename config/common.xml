@@ -11,6 +11,7 @@
    <plugin name="dmzObjectPluginCleanup"/>
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginList"/>
+   <plugin name="dmzQtPluginMessageInspector" unique="message-inspector"/>
 <!--
    <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
    <plugin name="dmzPluginMsgDump"/>
