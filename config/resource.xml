@@ -6,7 +6,11 @@
       <path value="./assets/Images"/>
       <path value="./assets/"/>
    </search>
+   <resource name="internet" file="Internet.svg"/>
    <resource name="node" file="NA_Node.svg"/>
+   <resource name="phone" file="Phone.svg"/>
+   <resource name="wireless" file="Wireless.svg"/>
+   <resource name="workstation" file="Workstation.svg"/>
 </resource-map>
 </runtime>
 </dmz>

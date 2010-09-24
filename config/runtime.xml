@@ -32,6 +32,21 @@
    </object-type>
    <object-type name="Work Station" parent="Computer">
       <render/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="workstation">
+                  <translate x="-50" y="-50"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Laptop" parent="Computer">
       <render/>
@@ -41,6 +56,21 @@
    </object-type>
    <object-type name="Smart Phone" parent="Computer">
       <render/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="phone">
+                  <translate x="-50" y="-50"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Network Node">
       <render/>
@@ -60,6 +90,24 @@
          </switch>
       </canvas-object-basic>
    </object-type>
+   <object-type name="Internet" parent="Network Node">
+      <render/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="internet">
+                  <translate x="-100" y="-100"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
+   </object-type>
    <object-type name="Fire Wall" parent="Network Node">
       <render/>
    </object-type>
@@ -68,6 +116,21 @@
    </object-type>
    <object-type name="Wireless Base Station" parent="Network Node">
       <render/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="wireless">
+                  <translate x="-50" y="-50"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Malware Mimic">
       <render/>

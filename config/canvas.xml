@@ -36,8 +36,8 @@
    </canvas>
    <scene>
       <background grid="true"/>
-      <min x="-300" y="-300"/>
-      <max x="300" y="300"/>
+      <min x="-1000" y="-1000"/>
+      <max x="1000" y="1000"/>
    </scene>
    <scrollbars value="false"/>
 </canvas>
