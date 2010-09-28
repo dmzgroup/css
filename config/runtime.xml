@@ -10,13 +10,15 @@
       <canvas-object/>
    </object-type>
    <object-type name="Computer">
-      <render/>
+   </object-type>
+   <object-type name="Server" parent="Computer">
+      <icon-pallet resource="server"/>
       <canvas-object/>
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="node">
-                  <translate x="-10" y="-10"/>
+               <image name="node" resource="server">
+                  <translate x="-139" y="-40"/>
                </image>
             </group>
          </items>
@@ -27,17 +29,14 @@
          </switch>
       </canvas-object-basic>
    </object-type>
-   <object-type name="Server" parent="Computer">
-      <render/>
-   </object-type>
    <object-type name="Work Station" parent="Computer">
-      <render/>
+      <icon-pallet resource="workstation"/>
       <canvas-object/>
       <canvas-object-basic>
          <items>
             <group name="base node">
                <image name="node" resource="workstation">
-                  <translate x="-50" y="-50"/>
+                  <translate x="-120" y="-100"/>
                </image>
             </group>
          </items>
@@ -49,19 +48,49 @@
       </canvas-object-basic>
    </object-type>
    <object-type name="Laptop" parent="Computer">
-      <render/>
+      <icon-pallet resource="laptop"/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="laptop">
+                  <translate x="-84" y="-84"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Tablet" parent="Computer">
-      <render/>
+      <icon-pallet resource="tablet"/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="tablet">
+                  <translate x="-70" y="-70"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
-   <object-type name="Smart Phone" parent="Computer">
-      <render/>
+   <object-type name="Phone" parent="Computer">
+      <icon-pallet resource="phone"/>
       <canvas-object/>
       <canvas-object-basic>
          <items>
             <group name="base node">
                <image name="node" resource="phone">
-                  <translate x="-50" y="-50"/>
+                  <translate x="-40" y="-40"/>
                </image>
             </group>
          </items>
@@ -73,31 +102,15 @@
       </canvas-object-basic>
    </object-type>
    <object-type name="Network Node">
-      <render/>
-      <canvas-object/>
-      <canvas-object-basic>
-         <items>
-            <group name="base node">
-               <image name="node" resource="node">
-                  <translate x="-10" y="-10"/>
-               </image>
-            </group>
-         </items>
-         <switch>
-            <state group="base node">
-               <item name="node"/>
-            </state>
-         </switch>
-      </canvas-object-basic>
    </object-type>
    <object-type name="Internet" parent="Network Node">
-      <render/>
+      <icon-pallet resource="internet"/>
       <canvas-object/>
       <canvas-object-basic>
          <items>
             <group name="base node">
                <image name="node" resource="internet">
-                  <translate x="-100" y="-100"/>
+                  <translate x="-105" y="-105"/>
                </image>
             </group>
          </items>
@@ -109,19 +122,49 @@
       </canvas-object-basic>
    </object-type>
    <object-type name="Fire Wall" parent="Network Node">
-      <render/>
+      <icon-pallet resource="firewall v2"/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="firewall v2">
+                  <translate x="-80" y="-130"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
-   <object-type name="Router" parent="Network Node">
-      <render/>
+   <object-type name="Switch" parent="Network Node">
+      <icon-pallet resource="switch"/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="switch">
+                  <translate x="-80" y="-40"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
    <object-type name="Wireless Base Station" parent="Network Node">
-      <render/>
+      <icon-pallet resource="wireless"/>
       <canvas-object/>
       <canvas-object-basic>
          <items>
             <group name="base node">
                <image name="node" resource="wireless">
-                  <translate x="-50" y="-50"/>
+                  <translate x="-80" y="-115"/>
                </image>
             </group>
          </items>
@@ -133,7 +176,22 @@
       </canvas-object-basic>
    </object-type>
    <object-type name="Malware Mimic">
-      <render/>
+      <icon-pallet resource="malware"/>
+      <canvas-object/>
+      <canvas-object-basic>
+         <items>
+            <group name="base node">
+               <image name="node" resource="malware">
+                  <translate x="-65" y="-65"/>
+               </image>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+         </switch>
+      </canvas-object-basic>
    </object-type>
 </runtime>
 </dmz>

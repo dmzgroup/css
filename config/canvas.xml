@@ -8,7 +8,7 @@
    <plugin name="dmzQtPluginCanvasLink" unique="canvas-link"/>
    <plugin name="dmzQtPluginCanvasZoomPan" unique="canvas-zoom"/>
    <plugin name="dmzQtPluginVersion"/>
-   <plugin name="dmzQtPluginTypePalletTool"/>
+   <plugin name="dmzQtPluginIconPalletTool" unique="icon-pallet"/>
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginRenderPickCanvas" unique="canvas-pick"/>
 </plugin-list>
@@ -54,7 +54,7 @@
 </canvas-object>
 <canvas-link>
    <link name="Network Link"/>
-   <pen-width value="2"/>
+   <pen-width value="4"/>
 </canvas-link>
 <canvas-pick>
    <order x="0" y="2" z="1"/>
