@@ -5,14 +5,21 @@
       <frequency value="60.0"/>
    </time>
    <message name="Update_Tool_Name" monostate="true"/>
+   <state name="No Linking"/>
    <object-type name="Tool"/>
    <object-type name="Tool Link Node" parent="Tool">
       <canvas-object/>
    </object-type>
-   <object-type name="Computer">
+   <object-type name="Device">
+   </object-type>
+   <object-type name="Computer" parent="Device">
    </object-type>
    <object-type name="Server" parent="Computer">
       <icon-pallet resource="server"/>
+      <link-list>
+         <object-type name="Network Node"/>
+         <object-type name="Software"/>
+      </link-list>
       <canvas-object/>
       <canvas-object-basic>
          <items>
@@ -21,16 +28,28 @@
                   <translate x="-139" y="-40"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
    </object-type>
    <object-type name="Work Station" parent="Computer">
       <icon-pallet resource="workstation"/>
+      <link-list>
+         <object-type name="Network Node"/>
+         <object-type name="Software"/>
+      </link-list>
       <canvas-object/>
       <canvas-object-basic>
          <items>
@@ -39,16 +58,28 @@
                   <translate x="-120" y="-100"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
    </object-type>
    <object-type name="Laptop" parent="Computer">
       <icon-pallet resource="laptop"/>
+      <link-list>
+         <object-type name="Network Node"/>
+         <object-type name="Software"/>
+      </link-list>
       <canvas-object/>
       <canvas-object-basic>
          <items>
@@ -57,16 +88,28 @@
                   <translate x="-84" y="-84"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
    </object-type>
    <object-type name="Tablet" parent="Computer">
       <icon-pallet resource="tablet"/>
+      <link-list>
+         <object-type name="Wireless"/>
+         <object-type name="Software"/>
+      </link-list>
       <canvas-object/>
       <canvas-object-basic>
          <items>
@@ -75,16 +118,28 @@
                   <translate x="-70" y="-70"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
    </object-type>
    <object-type name="Phone" parent="Computer">
       <icon-pallet resource="phone"/>
+      <link-list>
+         <object-type name="Wireless"/>
+         <object-type name="Software"/>
+      </link-list>
       <canvas-object/>
       <canvas-object-basic>
          <items>
@@ -93,15 +148,26 @@
                   <translate x="-40" y="-40"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
             </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
+            </state>
          </switch>
       </canvas-object-basic>
    </object-type>
-   <object-type name="Network Node">
+   <object-type name="Network Node" parent="Device">
+      <link-list>
+         <object-type name="Network Node"/>
+      </link-list>
    </object-type>
    <object-type name="Internet" parent="Network Node">
       <icon-pallet resource="internet"/>
@@ -113,10 +179,21 @@
                   <translate x="-105" y="-105"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
@@ -131,10 +208,18 @@
                   <translate x="-80" y="-130"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
@@ -149,10 +234,18 @@
                   <translate x="-80" y="-40"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>
@@ -167,16 +260,29 @@
                   <translate x="-80" y="-115"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
             </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
+            </state>
          </switch>
       </canvas-object-basic>
    </object-type>
-   <object-type name="Malware Mimic">
+   <object-type name="Software"/>
+   <object-type name="Malware Mimic" parent="Software">
       <icon-pallet resource="malware"/>
+      <link-list>
+         <object-type name="Device"/>
+         <object-type name="Software"/>
+      </link-list>
       <canvas-object/>
       <canvas-object-basic>
          <items>
@@ -185,10 +291,18 @@
                   <translate x="-65" y="-65"/>
                </image>
             </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false">
+                  <translate x="-80" y="-80"/>
+               </image>
+            </group>
          </items>
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
             </state>
          </switch>
       </canvas-object-basic>

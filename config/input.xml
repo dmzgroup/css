@@ -12,7 +12,7 @@
    <plugin name="dmzInputPluginMouseEventToMessage" unique="link-event"/>
    <plugin name="dmzInputPluginMouseEventToMessage" unique="delete-event"/>
 </plugin-list>
-<dmzInputPluginKeyEventToMessage>
+<key-events>
    <channel>
       <converter key="u">
          <target name="dmzPluginUndoDump" message="DumpUndoStackMessage"/>
@@ -24,13 +24,20 @@
          <target name="dmzQtPluginList" message="DMZ_Show_Plugin_List_Console"/>
       </converter>
    </channel>
-</dmzInputPluginKeyEventToMessage>
+</key-events>
 <main-window>
    <dock-windows>
-      <group area="top">
+      <group area="left">
          <widget
             name="dmzQtPluginButtonToChannel"
             title="Tools"
+            visible="false"
+            floating="true"
+         >
+         </widget>
+         <widget
+            name="icon-pallet"
+            title="Object Pallet"
             visible="false"
             floating="true"
          >
@@ -176,6 +183,7 @@
                message="Update_Link_Position_Message"
                next="update_two_clicks">
             <attribute type="position" name="position"/>
+            <attribute type="object" name="object"/>
          </condition>
          <condition
                button="1"
@@ -183,6 +191,7 @@
                message="Update_Link_Position_Message"
                next="update_drag">
             <attribute type="position" name="position"/>
+            <attribute type="object" name="object"/>
          </condition>
       </state>
       <state name="update_two_clicks" type="basic">
@@ -203,6 +212,7 @@
                action="moved"
                message="Update_Link_Position_Message">
             <attribute type="position" name="position"/>
+            <attribute type="object" name="object"/>
          </condition>
       </state>
       <state name="update_drag" type="basic">
@@ -221,6 +231,7 @@
                next="start"/>
          <condition button="1" action="moved" message="Update_Link_Position_Message">
             <attribute type="position" name="position"/>
+            <attribute type="object" name="object"/>
          </condition>
       </state>
    </converter>
