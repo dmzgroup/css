@@ -157,7 +157,7 @@
          </switch>
       </canvas-object-basic>
    </object-type>
-   <object-type name="Wireless Base Station" parent="Network Node">
+   <object-type name="Wireless" parent="Network Node">
       <icon-pallet resource="wireless"/>
       <canvas-object/>
       <canvas-object-basic>
