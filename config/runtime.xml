@@ -24,14 +24,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="server">
-                  <translate x="-139" y="-40"/>
-               </image>
+               <image name="node" resource="server"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -54,14 +50,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="workstation">
-                  <translate x="-120" y="-100"/>
-               </image>
+               <image name="node" resource="workstation"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -84,14 +76,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="laptop">
-                  <translate x="-84" y="-84"/>
-               </image>
+               <image name="node" resource="laptop"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -114,14 +102,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="tablet">
-                  <translate x="-70" y="-70"/>
-               </image>
+               <image name="node" resource="tablet"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -144,14 +128,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="phone">
-                  <translate x="-40" y="-40"/>
-               </image>
+               <image name="node" resource="phone"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -175,14 +155,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="internet">
-                  <translate x="-105" y="-105"/>
-               </image>
+               <image name="node" resource="internet"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -204,14 +180,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="firewall v3">
-                  <translate x="-80" y="-130"/>
-               </image>
+               <image name="node" resource="firewall v3"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -230,14 +202,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="switch">
-                  <translate x="-80" y="-40"/>
-               </image>
+               <image name="node" resource="switch"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -256,14 +224,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="wireless">
-                  <translate x="-80" y="-115"/>
-               </image>
+               <image name="node" resource="wireless"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
@@ -277,7 +241,7 @@
       </canvas-object-basic>
    </object-type>
    <object-type name="Software"/>
-   <object-type name="Malware Mimic" parent="Software">
+   <object-type name="Malware" parent="Software">
       <icon-pallet resource="malware"/>
       <link-list>
          <object-type name="Device"/>
@@ -287,14 +251,10 @@
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="malware">
-                  <translate x="-65" y="-65"/>
-               </image>
+               <image name="node" resource="malware"/>
             </group>
             <group name="link mode">
-               <image name="not ok" resource="not ok" isect="false">
-                  <translate x="-80" y="-80"/>
-               </image>
+               <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <switch>
