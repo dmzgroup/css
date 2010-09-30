@@ -56,6 +56,9 @@
    <link name="Network Link"/>
    <pen-width value="4"/>
 </canvas-link>
+<icon-pallet>
+   <use-session value="false"/>
+</icon-pallet>
 <canvas-pick>
    <order x="0" y="2" z="1"/>
    <source name="canvas"/>
