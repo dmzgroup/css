@@ -7,6 +7,7 @@
    </search>
    <resource name="firewall" file="Firewall.svg"/>
    <resource name="firewall v2" file="Firewallv2.svg"/>
+   <resource name="firewall v3" file="Firewallv3.svg"/>
    <resource name="internet" file="Internet.svg"/>
    <resource name="laptop" file="Laptop.svg"/>
    <resource name="malware" file="Malware.svg"/>
