@@ -5,12 +5,17 @@
    <plugin name="dmzJsModuleTypesV8Basic" scope="javascript"/>
    <plugin name="dmzJsModuleRuntimeV8Basic" scope="javascript"/>
    <plugin name="dmzJsPluginV8ConsoleQt" scope="javascript"/>
+   <plugin name="dmzJsModuleUiV8QtBasic"/>
+   <plugin name="dmzJsExtV8Archive" scope="javascript"/>
    <plugin name="dmzJsExtV8Object" scope="javascript"/>
    <plugin name="dmzJsExtV8Script" scope="javascript"/>
+   <plugin name="dmzJsExtV8ConfigIO" scope="javascript"/>
 </plugin-list>
 <javascript>
    <path value="./scripts"/>
    <path value="../js/scripts"/>
+   <instance name="fileMenu"/>
+   <instance name="editMenu"/>
    <instance name="create"/>
    <instance name="move"/>
    <instance name="link"/>

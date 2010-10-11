@@ -21,9 +21,7 @@
    <central-widget name="canvas"/>
    <menu-bar>
       <menu text="&amp;File"/>
-<!--
       <menu text="&amp;Edit"/>
--->
       <menu text="&amp;Window"/>
       <menu text="&amp;Help"/>
    </menu-bar>
