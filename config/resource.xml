@@ -5,9 +5,7 @@
    <search>
       <path value="./assets/"/>
    </search>
-   <resource name="firewall" file="Firewall.svg"/>
-   <resource name="firewall v2" file="Firewallv2.svg"/>
-   <resource name="firewall v3" file="Firewallv3.svg"/>
+   <resource name="firewall" file="Firewallv3.svg"/>
    <resource name="internet" file="Internet.svg"/>
    <resource name="laptop" file="Laptop.svg"/>
    <resource name="malware" file="Malware.svg"/>
@@ -16,7 +14,7 @@
    <resource name="server" file="Server.svg"/>
    <resource name="switch" file="Switch.svg"/>
    <resource name="tablet" file="Tablet.svg"/>
-   <resource name="wireless" file="Wireless.svg"/>
+   <resource name="wireless" file="Wirelessv2.svg"/>
    <resource name="workstation" file="Workstation.svg"/>
    <resource name="not ok" file="X.svg"/>
 </resource-map>

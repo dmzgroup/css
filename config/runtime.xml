@@ -175,12 +175,12 @@
       </canvas-object-basic>
    </object-type>
    <object-type name="Fire Wall" parent="Network Node">
-      <icon-pallet resource="firewall v3"/>
+      <icon-pallet resource="firewall"/>
       <canvas-object/>
       <canvas-object-basic>
          <items>
             <group name="base node">
-               <image name="node" resource="firewall v3"/>
+               <image name="node" resource="firewall"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
