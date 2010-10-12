@@ -13,14 +13,14 @@ var dmz =
   , redoAction
   ;
 
-undoAction = dmz.main.addMenu(self, "&Edit", UndoStr, function (action) {
+undoAction = dmz.main.addMenu(self, "&Edit", UndoStr, "Ctrl+z", function (action) {
 
    dmz.undo.doNext(dmz.undo.Undo);
 });
 
 undoAction.enabled(false);
 
-redoAction = dmz.main.addMenu(self, "&Edit", RedoStr, function (action) {
+redoAction = dmz.main.addMenu(self, "&Edit", RedoStr, "Ctrl+Shift+z", function (action) {
 
    dmz.undo.doNext(dmz.undo.Redo);
 });

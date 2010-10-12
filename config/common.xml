@@ -4,11 +4,11 @@
    <plugin name="dmzArchiveModuleBasic" scope="archive-module"/>
    <plugin name="dmzArchivePluginAutoLoad"/>
    <plugin name="dmzArchivePluginAutoSave"/>
-   <plugin name="dmzArchivePluginObject"/>
+   <plugin name="dmzArchivePluginObject" scope="archive-object"/>
    <plugin name="dmzArchivePluginUndo"/>
    <plugin name="dmzObjectModuleBasic"/>
    <plugin name="dmzObjectPluginUndo"/>
-   <plugin name="dmzObjectPluginCleanup"/>
+   <plugin name="dmzObjectPluginCleanup" scope="cleanup"/>
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginList"/>
 <!--
@@ -22,4 +22,20 @@
 <archive-module>
    <archive version="0"/>
 </archive-module>
+<archive-object>
+   <archive-scope>
+      <string value="archive"/>
+   </archive-scope>
+   <archive>
+      <object-type-set>
+         <object-type name="Tool"/>
+      </object-type-set>
+   </archive>
+</archive-object>
+<cleanup>
+   <cleanup>
+      <type name="Device"/>
+      <type name="Software"/>
+   </cleanup>
+</cleanup>
 </dmz>
