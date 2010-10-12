@@ -9,7 +9,8 @@ var dmz =
   // Constants
   , FileExt = ".csdf"
   // Variables
-  , cleanup = dmz.messaging.create("CleanupObjectsMessage");
+  , cleanup = dmz.messaging.create("CleanupObjectsMessage")
+  , saveAsAction
   ;
 
 dmz.main.addMenu (self, "&File", "New", "Ctrl+n", function (obj) {
@@ -27,14 +28,14 @@ dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
    cleanup.send ();
 
    file = dmz.fileDialog.getOpenFileName(
-      undefined,
+      dmz.main.mainWidget(),
       { caption: "Load file", filter: "Data File (*.csdf)" });
 
    if (file) {
 
       self.log.error (file);
 
-      data = dmz.io.read(file, "css.xml", self.log);
+      data = dmz.io.read({ archive: file, file: "css.xml", log: self.log});
 
       if (data) {
 
@@ -50,9 +51,10 @@ dmz.main.addSeparator("&File");
 
 dmz.main.addMenu(self, "&File", "Save", "Ctrl+s", function (obj) {
 
+   if (saveAsAction) { saveAsAction.trigger(); }
 });
 
-dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", function (obj) {
+saveAsAction = dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", function (obj) {
 
    var data
      , name
@@ -64,7 +66,7 @@ dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", function (obj) {
    if (data) {
 
       name = dmz.fileDialog.getSaveFileName(
-         undefined,
+         dmz.main.mainWidget(),
          { caption: "Save file", filter: "Data File (*.csdf)" });
 
       if (name) {
@@ -83,7 +85,7 @@ dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", function (obj) {
 
          self.log.error(name);
 
-         dmz.io.write (data, name, "css.xml");
+         dmz.io.write ({ data: data, archive: name, file: "css.xml"});
       }
    }
    else { self.log.error("No archive created"); }
