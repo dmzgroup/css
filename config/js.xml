@@ -19,6 +19,9 @@
    <!-- Note: inspectorSelf needs to go first -->
    <instance name="inspectorSelf"/>
    <instance name="computerInspector"/>
+   <instance name="internetInspector"/>
+   <instance name="switchInspector"/>
+   <instance name="malwareInspector"/>
    <instance name="fileMenu"/>
    <instance name="editMenu"/>
    <instance name="create"/>

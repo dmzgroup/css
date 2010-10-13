@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>328</width>
-    <height>104</height>
+    <height>74</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Computer Inspector</string>
+   <string>Switch Inspector</string>
   </property>
   <property name="frameShape">
    <enum>QFrame::StyledPanel</enum>
@@ -43,16 +43,6 @@
    </item>
    <item row="1" column="1">
     <widget class="QLineEdit" name="nameEdit"/>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="text">
-      <string>Operating System:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QComboBox" name="osBox"/>
    </item>
   </layout>
  </widget>

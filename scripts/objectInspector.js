@@ -85,7 +85,6 @@ exports.addInspector = function (widget, type, func) {
    if (widget && type && func) {
 
 //      hbox = dmz.layout.createHBoxLayout();
-
 //      hbox.addWidget(widget);
 
       _table[type.name()] =
@@ -93,7 +92,7 @@ exports.addInspector = function (widget, type, func) {
          , func: func 
          , type: type
          , index: _stack.add(widget)
-      };
+         };
    }
 
    print("Stack count:", _stack.count());
