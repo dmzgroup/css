@@ -131,13 +131,20 @@
             <attribute type="position" name="position"/>
             <attribute type="object" name="object"/>
          </condition>
+         <condition
+               button="1"
+               action="released"
+               message="Select_Object_Message"
+         >
+            <attribute type="object" name="object"/>
+         </condition>
       </state>
       <state name="default_test" type="basic">
          <condition button="1" action="released" message="Unselect_Move_Object_Message"/>
          <condition
                button="1"
                action="released"
-               message="Edit_Object_Attributes_Message"
+               message="Select_Object_Message"
                next="first">
             <attribute type="object" name="object"/>
          </condition>

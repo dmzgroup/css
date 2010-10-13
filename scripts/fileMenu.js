@@ -5,7 +5,10 @@ var dmz =
        , io: require("dmz/runtime/configIO")
        , main: require("dmz/ui/mainWindow")
        , messaging: require("dmz/runtime/messaging")
+       , undo: require("dmz/runtime/undo")
        }
+  // Functions
+  , reset
   // Constants
   , FileExt = ".csdf"
   // Variables
@@ -13,9 +16,15 @@ var dmz =
   , saveAsAction
   ;
 
-dmz.main.addMenu (self, "&File", "New", "Ctrl+n", function (obj) {
+reset = function () {
 
    cleanup.send ();
+   dmz.undo.reset ();
+};
+
+dmz.main.addMenu (self, "&File", "New", "Ctrl+n", function (obj) {
+
+   reset ();
 });
 
 dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
@@ -25,7 +34,7 @@ dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
      , file
      ;
 
-   cleanup.send ();
+   reset ();
 
    file = dmz.fileDialog.getOpenFileName(
       dmz.main.mainWidget(),

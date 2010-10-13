@@ -10,6 +10,11 @@ var dmz =
   , offset
   ;
 
+dmz.messaging.subscribe(self, "Select_Object_Message", function (data) {
+
+  if (data) { dmz.object.select(data.handle("object", 0)); }
+});
+
 dmz.messaging.subscribe(self, "Select_Move_Object_Message", function (data) {
 
    var pos
@@ -21,6 +26,7 @@ dmz.messaging.subscribe(self, "Select_Move_Object_Message", function (data) {
 
       item = data.handle("object", 0);
       offset = data.vector("position", 0);
+      dmz.object.select(item);
 
       if (item && offset && dmz.object.isObject(item)) {
 

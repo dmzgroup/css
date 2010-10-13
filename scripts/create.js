@@ -1,5 +1,6 @@
 var dmz =
-       { object: require("dmz/components/object")
+       { cssConst: require("cssConst")
+       , object: require("dmz/components/object")
        , objectType: require("dmz/runtime/objectType")
        , messaging: require("dmz/runtime/messaging")
        , data: require("dmz/runtime/data")
@@ -7,9 +8,9 @@ var dmz =
        , undo: require("dmz/runtime/undo")
        , util: require("dmz/types/util")
        }
-//  Constants
+  //  Constants
   , VectorAttr = dmz.defs.createNamedHandle("vector")
-//  Functions 
+  //  Functions 
   ;
 
 dmz.messaging.subscribe(self, "Drop_Create_Message",  function (data) {
@@ -29,6 +30,7 @@ dmz.messaging.subscribe(self, "Drop_Create_Message",  function (data) {
          undo = dmz.undo.startRecord("Create: " + currentType);
          obj = dmz.object.create(currentType);
          dmz.object.position(obj, null, pos);
+         dmz.object.text(obj, dmz.cssConst.NameAttr, currentType.name());
          dmz.object.activate(obj);
          dmz.object.select(obj);
          dmz.undo.stopRecord(undo);

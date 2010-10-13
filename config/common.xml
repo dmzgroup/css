@@ -7,6 +7,7 @@
    <plugin name="dmzArchivePluginObject" scope="archive-object"/>
    <plugin name="dmzArchivePluginUndo"/>
    <plugin name="dmzObjectModuleBasic"/>
+   <plugin name="dmzObjectModuleSelectBasic"/>
    <plugin name="dmzObjectPluginUndo"/>
    <plugin name="dmzObjectPluginCleanup" scope="cleanup"/>
    <plugin name="dmzRenderModulePickBasic"/>
