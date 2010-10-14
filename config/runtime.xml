@@ -25,14 +25,34 @@
          <items>
             <group name="base node">
                <image name="node" resource="server"/>
+               <text name="name">
+                  <textColor>
+                     <string value="white"/>
+                     <alpha value="0.75"/>
+                  </textColor>
+                  <outlineColor>
+                     <string value="black"/>
+                     <alpha value="0.75"/>
+                  </outlineColor>
+                  <backgroundColor>
+                     <string value="black"/>
+                     <alpha value="0.75"/>
+                  </backgroundColor>
+                  <translate x="0" y="50"/>
+                  <alignment value="center"/>
+               </text>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
+         <text>
+            <item name="name" attribute="Name"/>
+         </text>
          <switch>
             <state group="base node">
                <item name="node"/>
+               <item name="name"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
