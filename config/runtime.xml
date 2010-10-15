@@ -6,6 +6,7 @@
    </time>
    <message name="Update_Tool_Name" monostate="true"/>
    <state name="No Linking"/>
+   <state name="Selected"/>
    <object-type name="Tool"/>
    <object-type name="Tool Link Node" parent="Tool">
       <canvas-object/>
@@ -25,6 +26,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="server"/>
+               <image name="node-select" resource="server select"/>
                <text name="name">
                   <textColor>
                      <string value="white"/>
@@ -54,6 +56,10 @@
                <item name="node"/>
                <item name="name"/>
             </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
+               <item name="name"/>
+            </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
             </state>
@@ -71,6 +77,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="workstation"/>
+               <image name="node-select" resource="workstation select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -79,6 +86,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -97,6 +107,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="laptop"/>
+               <image name="node-select" resource="laptop select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -105,6 +116,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -123,6 +137,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="tablet"/>
+               <image name="node-select" resource="tablet select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -131,6 +146,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -149,6 +167,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="phone"/>
+               <image name="node-select" resource="phone select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -157,6 +176,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -176,6 +198,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="internet"/>
+               <image name="node-select" resource="internet select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -185,8 +208,8 @@
             <state group="base node">
                <item name="node"/>
             </state>
-            <state name="No Linking" group="link mode">
-               <item name="not ok"/>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -201,6 +224,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="firewall"/>
+               <image name="node-select" resource="firewall select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -209,6 +233,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -223,6 +250,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="switch"/>
+               <image name="node-select" resource="switch select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -231,6 +259,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -245,6 +276,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="wireless"/>
+               <image name="node-select" resource="wireless select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -253,6 +285,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -272,6 +307,7 @@
          <items>
             <group name="base node">
                <image name="node" resource="malware"/>
+               <image name="node-select" resource="malware select"/>
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
@@ -280,6 +316,9 @@
          <switch>
             <state group="base node">
                <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>

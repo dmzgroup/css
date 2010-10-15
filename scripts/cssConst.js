@@ -4,3 +4,4 @@ var util = require("dmz/types/util")
 
 util.defineConst(exports, "NameAttr", defs.createNamedHandle("Name"));
 util.defineConst(exports, "OSAttr", defs.createNamedHandle("Operating System"));
+util.defineConst(exports, "Select", defs.lookupState("Selected"));
