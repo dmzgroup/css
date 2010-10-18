@@ -18,7 +18,8 @@ var dmz =
   , _stack = _form.lookup("stack")
   ;
 
-dmz.main.addDock(_dock, dmz.uiConst.NoToolBarArea);
+_dock.floating(true);
+dmz.main.addDock(_dock, dmz.uiConst.AllToolBarAreas);
 
 findInspector = function (handle) {
 
