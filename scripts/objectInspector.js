@@ -1,8 +1,10 @@
 var dmz =
-       { object: require("dmz/components/object")
+       { cssConst: require("cssConst")
+       , object: require("dmz/components/object")
        , uiConst: require("dmz/ui")
        , uiLoader: require("dmz/ui/uiLoader")
        , main: require("dmz/ui/mainWindow")
+       , mask: require("dmz/types/mask")
        , layout: require("dmz/ui/layout")
        }
   // Functions
@@ -18,8 +20,8 @@ var dmz =
   , _stack = _form.lookup("stack")
   ;
 
-//_dock.floating(true);
-dmz.main.addDock(_dock, dmz.uiConst.RightToolBarArea);
+_dock.floating(true);
+dmz.main.addDock(_dock, dmz.uiConst.NoToolBarArea);
 
 findInspector = function (handle) {
 
@@ -42,16 +44,34 @@ exports.setSelf = function (self) {
 
 dmz.object.flag.observe(self, dmz.object.SelectAttribute, function (handle, attr, value) {
 
-   var inspector;
+   var inspector
+     , state
+     ;
 
    if (!value && (handle === _selected)) {
 
+      state = dmz.object.state(handle);
+
+      if (state) {
+
+         state = state.unset(dmz.cssConst.Select);
+         dmz.object.state(handle, null, state);
+      }
 print("Unselected:", handle);
       _stack.currentIndex(0);
       _selected = undefined;
    }
    else if (value && (handle !== _selected)) {
 
+      state = dmz.object.state(handle);
+
+      if (!state) { state = dmz.mask.create(); }
+
+      if (state) {
+
+         state = state.or(dmz.cssConst.Select);
+         dmz.object.state(handle, null, state);
+      }
 print("Selected:", handle);
       inspector = findInspector(handle);
 
@@ -86,7 +106,6 @@ exports.addInspector = function (widget, type, func) {
    if (widget && type && func) {
 
 //      hbox = dmz.layout.createHBoxLayout();
-
 //      hbox.addWidget(widget);
 
       _table[type.name()] =
@@ -94,7 +113,7 @@ exports.addInspector = function (widget, type, func) {
          , func: func 
          , type: type
          , index: _stack.add(widget)
-      };
+         };
    }
 
    print("Stack count:", _stack.count());
