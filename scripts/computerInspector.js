@@ -4,7 +4,7 @@ var dmz =
        , object: require("dmz/components/object")
        , objectType: require("dmz/runtime/objectType")
        , uiLoader: require("dmz/ui/uiLoader")
-       , inspector: require("objectInspector")
+       , interface: require("dmz/runtime/interface")
        , undo: require("inspectorUndo")
        }
   // Functions
@@ -107,29 +107,35 @@ _os.observe(self, "currentIndexChanged", function (index, widget) {
    }
 });
 
-dmz.inspector.addInspector(_form, ComputerType, function (handle) {
+dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
 
-   var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
-     , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
-     , type = dmz.object.type(handle)
-     ;
+   if (Mode === dmz.interface.Activate) {
 
-   _undo.clear();
-   _object = undefined;
+      interface.addInspector(_form, ComputerType, function (handle) {
 
-   if (type) { _type.text(type.name()); }
-   else { _type.text("Unknown Type"); }
+         var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
+           , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
+           , type = dmz.object.type(handle)
+           ;
 
-   if (name) { _name.text(name); }
-   else { _name.text(""); }
+         _undo.clear();
+         _object = undefined;
 
-   setOS(type);
+         if (type) { _type.text(type.name()); }
+         else { _type.text("Unknown Type"); }
 
-   if (os) { _os.currentText(os); }
-   else { _os.currentIndex(0); }
+         if (name) { _name.text(name); }
+         else { _name.text(""); }
 
-   _object = handle;
-}); 
+         setOS(type);
+
+         if (os) { _os.currentText(os); }
+         else { _os.currentIndex(0); }
+
+         _object = handle;
+      }); 
+   }
+});
 
 dmz.object.text.observe(self, dmz.cssConst.NameAttr, function (handle, attr, value) {
 

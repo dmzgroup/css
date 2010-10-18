@@ -6,6 +6,7 @@ var dmz =
        , main: require("dmz/ui/mainWindow")
        , mask: require("dmz/types/mask")
        , layout: require("dmz/ui/layout")
+       , interface: require("dmz/runtime/interface")
        }
   // Functions
   , print = require("sys").puts
@@ -13,6 +14,7 @@ var dmz =
   // Constants
   , DockName = "Object Inspector"
   // Variables
+  , _exports = {}
   , _table = {}
   , _selected
   , _form = dmz.uiLoader.load("ObjectInspector")
@@ -39,8 +41,6 @@ findInspector = function (handle) {
 
    return result;
 };
-
-exports.setSelf = function (self) {
 
 dmz.object.flag.observe(self, dmz.object.SelectAttribute, function (handle, attr, value) {
 
@@ -87,7 +87,7 @@ print("current index", inspector.index);
    }
 });
 
-dmz.object.destroy(self, function (handle) {
+dmz.object.destroy.observe(self, function (handle) {
 
    if (handle === _selected) {
 
@@ -96,9 +96,7 @@ dmz.object.destroy(self, function (handle) {
    }
 });
 
-}
-
-exports.addInspector = function (widget, type, func) {
+_exports.addInspector = function (widget, type, func) {
 
    var hbox
      ;
@@ -118,3 +116,6 @@ exports.addInspector = function (widget, type, func) {
 
    print("Stack count:", _stack.count());
 };
+
+// Publish interface
+dmz.interface.publish(self, _exports);
