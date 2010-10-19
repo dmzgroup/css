@@ -1,7 +1,7 @@
 var dmz =
        { cssConst: require("cssConst")
        , object: require("dmz/components/object")
-       , uiConst: require("dmz/ui")
+       , uiConst: require("dmz/ui/consts")
        , uiLoader: require("dmz/ui/uiLoader")
        , main: require("dmz/ui/mainWindow")
        , mask: require("dmz/types/mask")
@@ -18,12 +18,11 @@ var dmz =
   , _table = {}
   , _selected
   , _form = dmz.uiLoader.load("ObjectInspector")
-  , _dock = dmz.main.createDock(DockName, _form)
+  , _dock = dmz.main.createDock(DockName, dmz.uiConst.RightToolBarArea, _form)
   , _stack = _form.lookup("stack")
   ;
 
 _dock.floating(true);
-dmz.main.addDock(_dock, dmz.uiConst.NoToolBarArea);
 
 findInspector = function (handle) {
 
