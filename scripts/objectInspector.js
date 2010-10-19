@@ -1,9 +1,10 @@
 var dmz =
        { cssConst: require("cssConst")
        , object: require("dmz/components/object")
-       , uiConst: require("dmz/ui")
+       , uiConst: require("dmz/ui/consts")
        , uiLoader: require("dmz/ui/uiLoader")
        , main: require("dmz/ui/mainWindow")
+       , dock: require("dmz/ui/dockWidget")
        , mask: require("dmz/types/mask")
        , layout: require("dmz/ui/layout")
        , interface: require("dmz/runtime/interface")
@@ -18,12 +19,18 @@ var dmz =
   , _table = {}
   , _selected
   , _form = dmz.uiLoader.load("ObjectInspector")
-  , _dock = dmz.main.createDock(DockName, _form)
+  , _dock = dmz.main.createDock
+    (DockName
+    , { area: dmz.uiConst.RightToolBarArea
+      , allowedAreas: [dmz.uiConst.NoToolBarArea]
+      , floating: true
+      , visible: true
+      }
+    , _form
+    )
   , _stack = _form.lookup("stack")
   ;
 
-_dock.floating(true);
-dmz.main.addDock(_dock, dmz.uiConst.NoToolBarArea);
 
 findInspector = function (handle) {
 
@@ -57,7 +64,7 @@ dmz.object.flag.observe(self, dmz.object.SelectAttribute, function (handle, attr
          state = state.unset(dmz.cssConst.Select);
          dmz.object.state(handle, null, state);
       }
-print("Unselected:", handle);
+
       _stack.currentIndex(0);
       _selected = undefined;
    }
@@ -72,14 +79,13 @@ print("Unselected:", handle);
          state = state.or(dmz.cssConst.Select);
          dmz.object.state(handle, null, state);
       }
-print("Selected:", handle);
+
       inspector = findInspector(handle);
 
       if (inspector) {
 
          inspector.func(handle);
          _stack.currentIndex(inspector.index);
-print("current index", inspector.index);
       }
       else { _stack.currentIndex(0); print("inspector not found"); }
 
@@ -103,9 +109,6 @@ _exports.addInspector = function (widget, type, func) {
 
    if (widget && type && func) {
 
-//      hbox = dmz.layout.createHBoxLayout();
-//      hbox.addWidget(widget);
-
       _table[type.name()] =
          { widget: widget
          , func: func 
@@ -113,8 +116,6 @@ _exports.addInspector = function (widget, type, func) {
          , index: _stack.add(widget)
          };
    }
-
-   print("Stack count:", _stack.count());
 };
 
 // Publish interface
