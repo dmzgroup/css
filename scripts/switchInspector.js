@@ -33,11 +33,11 @@ _name.observe(self, "textChanged", function(value, widget) {
    }
 });
 
-dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
+dmz.interface.subscribe(self, "objectInspector", function (Mode, Interface) {
 
    if (Mode === dmz.interface.Activate) {
 
-      interface.addInspector(_form, NodeType, function (handle) {
+      Interface.addInspector(_form, NodeType, function (handle) {
 
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , type = dmz.object.type(handle)

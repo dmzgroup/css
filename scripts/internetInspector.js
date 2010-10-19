@@ -26,11 +26,11 @@ var dmz =
    _ip.addItem("6");
 })();
 
-dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
+dmz.interface.subscribe(self, "objectInspector", function (Mode, Interface) {
 
    if (Mode === dmz.interface.Activate) {
 
-      interface.addInspector(_form, InternetType, function (handle) {
+      Interface.addInspector(_form, InternetType, function (handle) {
 
          var type = dmz.object.type(handle)
            ;

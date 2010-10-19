@@ -107,11 +107,11 @@ _os.observe(self, "currentIndexChanged", function (index, widget) {
    }
 });
 
-dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
+dmz.interface.subscribe(self, "objectInspector", function (Mode, Interface) {
 
    if (Mode === dmz.interface.Activate) {
 
-      interface.addInspector(_form, ComputerType, function (handle) {
+      Interface.addInspector(_form, ComputerType, function (handle) {
 
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
