@@ -11,13 +11,13 @@
    <plugin name="dmzJsExtV8Script" scope="javascript"/>
    <plugin name="dmzJsExtV8File" scope="javascript"/>
    <plugin name="dmzJsExtV8ConfigIO" scope="javascript"/>
+   <plugin name="dmzJsExtV8Interface" scope="javascript"/>
 </plugin-list>
 <javascript>
    <path value="./scripts"/>
    <path value="./ui"/>
    <path value="../js/scripts"/>
-   <!-- Note: inspectorSelf needs to go first -->
-   <instance name="inspectorSelf"/>
+   <instance name="objectInspector"/>
    <instance name="computerInspector"/>
    <instance name="internetInspector"/>
    <instance name="switchInspector"/>
