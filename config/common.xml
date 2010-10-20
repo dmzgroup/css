@@ -13,8 +13,8 @@
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginList"/>
 <!--
-   <plugin name="dmzQtPluginMessageInspector" unique="message-inspector"/>
    <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
+   <plugin name="dmzQtPluginMessageInspector" unique="message-inspector"/>
    <plugin name="dmzPluginMsgDump"/>
    <plugin name="dmzObjectPluginDump"/>
    <plugin name="dmzPluginUndoDump"/>

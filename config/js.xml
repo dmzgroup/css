@@ -28,6 +28,7 @@
    <instance name="move"/>
    <instance name="link"/>
    <instance name="delete"/>
+   <instance name="highlight"/>
 </javascript>
 </dmz>
 

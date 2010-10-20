@@ -6,24 +6,34 @@
       <path value="./assets/"/>
    </search>
    <resource name="firewall" file="Firewall.svg"/>
+   <resource name="firewall highlight" file="FirewallInvert.svg"/>
    <resource name="firewall select" file="FirewallSelect.svg"/>
    <resource name="internet" file="Internet.svg"/>
+   <resource name="internet highlight" file="InternetInvert.svg"/>
    <resource name="internet select" file="InternetSelect.svg"/>
    <resource name="laptop" file="Laptop.svg"/>
+   <resource name="laptop highlight" file="LaptopInvert.svg"/>
    <resource name="laptop select" file="LaptopSelect.svg"/>
    <resource name="malware" file="Malware.svg"/>
+   <resource name="malware highlight" file="MalwareInvert.svg"/>
    <resource name="malware select" file="MalwareSelect.svg"/>
    <resource name="phone" file="Phone.svg"/>
+   <resource name="phone highlight" file="PhoneInvert.svg"/>
    <resource name="phone select" file="PhoneSelect.svg"/>
    <resource name="server" file="Server.svg"/>
+   <resource name="server highlight" file="ServerInvert.svg"/>
    <resource name="server select" file="ServerSelect.svg"/>
    <resource name="switch" file="Switch.svg"/>
+   <resource name="switch highlight" file="SwitchInvert.svg"/>
    <resource name="switch select" file="SwitchSelect.svg"/>
    <resource name="tablet" file="Tablet.svg"/>
+   <resource name="tablet highlight" file="TabletInvert.svg"/>
    <resource name="tablet select" file="TabletSelect.svg"/>
    <resource name="wireless" file="Wireless.svg"/>
+   <resource name="wireless highlight" file="WirelessInvert.svg"/>
    <resource name="wireless select" file="WirelessSelect.svg"/>
    <resource name="workstation" file="Workstation.svg"/>
+   <resource name="workstation highlight" file="WorkstationInvert.svg"/>
    <resource name="workstation select" file="WorkstationSelect.svg"/>
    <resource name="not ok" file="X.svg"/>
 </resource-map>

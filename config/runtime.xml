@@ -7,6 +7,7 @@
    <message name="Update_Tool_Name" monostate="true"/>
    <state name="No Linking"/>
    <state name="Selected"/>
+   <state name="Highlight"/>
    <object-type name="Tool"/>
    <object-type name="Tool Link Node" parent="Tool">
       <canvas-object/>
@@ -23,7 +24,7 @@
       </link-list>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="computerNode">
+         <template name="icon">
             <var name="base" value="server"/>
             <var name="selected" value="server select"/>
             <var name="highlight" value="server highlight"/>
@@ -38,7 +39,7 @@
       </link-list>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="computerNode">
+         <template name="icon">
             <var name="base" value="workstation"/>
             <var name="selected" value="workstation select"/>
             <var name="highlight" value="workstation highlight"/>
@@ -53,7 +54,7 @@
       </link-list>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="computerNode">
+         <template name="icon">
             <var name="base" value="laptop"/>
             <var name="selected" value="laptop select"/>
             <var name="highlight" value="laptop highlight"/>
@@ -68,7 +69,7 @@
       </link-list>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="computerNode">
+         <template name="icon">
             <var name="base" value="tablet"/>
             <var name="selected" value="tablet select"/>
             <var name="highlight" value="tablet highlight"/>
@@ -83,7 +84,7 @@
       </link-list>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="computerNode">
+         <template name="icon">
             <var name="base" value="phone"/>
             <var name="selected" value="phone select"/>
             <var name="highlight" value="phone highlight"/>
@@ -99,7 +100,7 @@
       <icon-pallet resource="internet"/>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="networkNode">
+         <template name="icon">
             <var name="base" value="internet"/>
             <var name="selected" value="internet select"/>
             <var name="highlight" value="internet highlight"/>
@@ -110,7 +111,7 @@
       <icon-pallet resource="firewall"/>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="networkNode">
+         <template name="icon">
             <var name="base" value="firewall"/>
             <var name="selected" value="firewall select"/>
             <var name="highlight" value="firewall highlight"/>
@@ -121,7 +122,7 @@
       <icon-pallet resource="switch"/>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="networkNode">
+         <template name="icon">
             <var name="base" value="switch"/>
             <var name="selected" value="switch select"/>
             <var name="highlight" value="switch highlight"/>
@@ -132,7 +133,7 @@
       <icon-pallet resource="wireless"/>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="networkNode">
+         <template name="icon">
             <var name="base" value="wireless"/>
             <var name="selected" value="wireless select"/>
             <var name="highlight" value="wireless highlight"/>
@@ -148,10 +149,10 @@
       </link-list>
       <canvas-object/>
       <canvas-object-basic>
-         <template name="softwareNode">
-            <var name="base" resource="malware"/>
-            <var name="selected" resource="malware select"/>
-            <var name="highlight" resource="malware highlight"/>
+         <template name="icon">
+            <var name="base" value="malware"/>
+            <var name="selected" value="malware select"/>
+            <var name="highlight" value="malware highlight"/>
          </template>
       </canvas-object-basic>
    </object-type>
