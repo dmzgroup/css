@@ -110,7 +110,7 @@
                next="first"
                message="Mouse_Move_Message"
          >
-            <attribute type="object" name="handle"/>
+            <attribute type="object" name="object"/>
          </condition>
       </state>
    </converter>
