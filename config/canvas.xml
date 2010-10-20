@@ -48,6 +48,93 @@
    </plugin-list>
    <canvas-object-basic>
       <defaults zValue="1" itemIgnoresTransformations="false"/>
+      <template name="computerNode">
+         <items>
+            <group name="base node">
+               <image name="node" resource="base"/>
+               <image name="node-select" resource="selected"/>
+               <text name="name">
+                  <textColor>
+                     <string value="white"/>
+                     <alpha value="0.75"/>
+                  </textColor>
+                  <outlineColor>
+                     <string value="black"/>
+                     <alpha value="0.75"/>
+                  </outlineColor>
+                  <backgroundColor>
+                     <string value="black"/>
+                     <alpha value="0.75"/>
+                  </backgroundColor>
+                  <translate x="0" y="50"/>
+                  <alignment value="center"/>
+               </text>
+            </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false"/>
+            </group>
+         </items>
+         <text>
+            <item name="name" attribute="Name"/>
+         </text>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+               <item name="name"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
+               <item name="name"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
+            </state>
+         </switch>
+      </template>
+      <template name="networkNode">
+         <items>
+            <group name="base node">
+               <image name="node" resource="base"/>
+               <image name="node-select" resource="selected"/>
+            </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false"/>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
+            </state>
+         </switch>
+      </template>
+      <template name="softwareNode">
+         <items>
+            <group name="base node">
+               <image name="node" resource="malware"/>
+               <image name="node-select" resource="malware select"/>
+            </group>
+            <group name="link mode">
+               <image name="not ok" resource="not ok" isect="false"/>
+            </group>
+         </items>
+         <switch>
+            <state group="base node">
+               <item name="node"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
+            </state>
+            <state name="No Linking" group="link mode">
+               <item name="not ok"/>
+            </state>
+         </switch>
+      </template>
    </canvas-object-basic>
 </canvas-object>
 <canvas-link>
