@@ -8,7 +8,8 @@ var dmz =
        , undo: require("inspectorUndo")
        }
   // Functions
-  , setOS
+  , _setOS
+  , _getOS
   // Constants
   , ComputerType = dmz.objectType.lookup("Computer")
   , PhoneType = dmz.objectType.lookup("Phone")
@@ -58,18 +59,12 @@ var dmz =
 
 })();
 
-setOS = function (type) {
+_setOS = function (type) {
 
-   var list
+   var list = _getOS(type);
      ;
 
    _os.clear();
-
-   while (type && !list) {
-
-      list = _osTable[type.name()];
-      type = type.parent();
-   }
 
    if (list) {
 
@@ -77,6 +72,19 @@ setOS = function (type) {
 
       list.forEach(function (name) { _os.addItem(name); });
    }
+}
+
+_getOS = function (type) {
+
+   var result;
+
+   while (type && !result) {
+
+      result = _osTable[type.name()];
+      type = type.parent();
+   }
+
+   return result;
 }
 
 _name.observe(self, "textChanged", function(value, widget) {
@@ -127,7 +135,7 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
          if (name) { _name.text(name); }
          else { _name.text(""); }
 
-         setOS(type);
+         _setOS(type);
 
          if (os) { _os.currentText(os); }
          else { _os.currentIndex(0); }
@@ -137,8 +145,34 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
    }
 });
 
+dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
+
+   if (Mode === dmz.interface.Activate) {
+
+      interface.addInit(ComputerType, function (handle, type) {
+
+         var os = "Unknown"
+           , list = _getOS(type);
+           ;
+
+         if (list) { os = list[0]; }
+
+         dmz.object.text(
+            handle,
+            dmz.cssConst.NameAttr,
+            type.name() + interface.counter());
+
+         if (os) { dmz.object.text(handle, dmz.cssConst.OSAttr, os); }
+      }); 
+   }
+});
+
 dmz.object.text.observe(self, dmz.cssConst.NameAttr, function (handle, attr, value) {
 
-//self.log.error(_object, handle, value);
-   if (!_inUpdate && handle === _object) { _name.text(value); }
+   if (!_inUpdate && (handle === _object)) { _name.text(value); }
+});
+
+dmz.object.text.observe(self, dmz.cssConst.OSAttr, function (handle, attr, value) {
+
+   if (!_inUpdate && (handle === _object)) { _os.currentText(value); }
 });

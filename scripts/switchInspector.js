@@ -57,9 +57,22 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
    }
 });
 
+dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
+
+   if (Mode === dmz.interface.Activate) {
+
+      interface.addInit(NodeType, function (handle, type) {
+
+         dmz.object.text(
+            handle,
+            dmz.cssConst.NameAttr,
+            type.name() + interface.counter());
+      });
+   }
+});
+
 dmz.object.text.observe(self, dmz.cssConst.NameAttr, function (handle, attr, value) {
 
-//self.log.error(_object, handle, value);
-   if (!_inUpdate && handle === _object) { _name.text(value); }
+   if (!_inUpdate && (handle === _object)) { _name.text(value); }
 });
 

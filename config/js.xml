@@ -17,6 +17,7 @@
    <path value="./scripts"/>
    <path value="./ui"/>
    <path value="../js/scripts"/>
+   <instance name="objectInit"/>
    <instance name="objectInspector"/>
    <instance name="computerInspector"/>
    <instance name="internetInspector"/>

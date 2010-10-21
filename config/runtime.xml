@@ -156,5 +156,7 @@
          </template>
       </canvas-object-basic>
    </object-type>
+   <object-type name="Service" parent="Software">
+   </object-type>
 </runtime>
 </dmz>
