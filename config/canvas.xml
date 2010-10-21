@@ -30,7 +30,7 @@
 </main-window>
 <canvas>
    <canvas opengl="false" antialiasing="true" textantialiasing="true">
-      <zoom default="1.0"/>
+      <zoom min="0.5" max="2.0" default="0.5" step="0.5"/>
    </canvas>
    <scene>
       <background grid="true"/>
@@ -112,6 +112,9 @@
    <link name="Network Link"/>
    <pen-width value="4"/>
 </canvas-link>
+<canvas-zoom>
+   <zoom min="0.2" max="2.0" default="0.5"/>
+</canvas-zoom>
 <icon-pallet>
    <use-session value="false"/>
 </icon-pallet>
