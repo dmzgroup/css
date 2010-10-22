@@ -7,9 +7,9 @@ var dmz =
        , interface: require("dmz/runtime/interface")
        , undo: require("dmz/runtime/undo")
        }
-  // Functions
   // Constants
   , InternetType = dmz.objectType.lookup("Internet")
+  // Functions
   // Variables
   , _inUpdate = false
   , _object

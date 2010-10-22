@@ -7,24 +7,24 @@ var dmz =
        , messaging: require("dmz/runtime/messaging")
        , undo: require("dmz/runtime/undo")
        }
-  // Functions
-  , reset
   // Constants
   , FileExt = ".csdf"
+  // Functions
+  , _reset
   // Variables
-  , cleanup = dmz.messaging.create("CleanupObjectsMessage")
-  , saveAsAction
+  , _cleanup = dmz.messaging.create("CleanupObjectsMessage")
+  , _saveAsAction
   ;
 
-reset = function () {
+_reset = function () {
 
-   cleanup.send ();
+   _cleanup.send ();
    dmz.undo.reset ();
 };
 
 dmz.main.addMenu (self, "&File", "New", "Ctrl+n", function (obj) {
 
-   reset ();
+   _reset ();
 });
 
 dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
@@ -34,7 +34,7 @@ dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
      , file
      ;
 
-   reset ();
+   _reset ();
 
    file = dmz.fileDialog.getOpenFileName(
       dmz.main.mainWidget(),
@@ -60,10 +60,11 @@ dmz.main.addSeparator("&File");
 
 dmz.main.addMenu(self, "&File", "Save", "Ctrl+s", function (obj) {
 
-   if (saveAsAction) { saveAsAction.trigger(); }
+   if (_saveAsAction) { _saveAsAction.trigger(); }
 });
 
-saveAsAction = dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", function (obj) {
+_saveAsAction = dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s",
+function (obj) {
 
    var data
      , name

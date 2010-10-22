@@ -7,13 +7,13 @@ var dmz =
        , interface: require("dmz/runtime/interface")
        , undo: require("inspectorUndo")
        }
-  // Functions
-  , _setOS
-  , _getOS
   // Constants
   , ComputerType = dmz.objectType.lookup("Computer")
   , PhoneType = dmz.objectType.lookup("Phone")
   , TabletType = dmz.objectType.lookup("Tablet")
+  // Functions
+  , _setOS
+  , _getOS
   // Variables
   , _inUpdate = false
   , _osTable = {}

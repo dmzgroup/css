@@ -7,35 +7,36 @@ var dmz =
       , objectType: require("dmz/runtime/objectType")
       , undo: require("dmz/runtime/undo")
       }
-   // Functions
-   , findWhiteList
-   , isLinkable
-   , updateNoLink
-   // Variables
-   , firstHandle = dmz.object.create("Tool Link Node")
-   , secondHandle = dmz.object.create("Tool Link Node")
+   // Constants
    , NetType = dmz.objectType.lookup("Network Node")
    , NetLink = dmz.defs.createNamedHandle("Network Link")
    , NoLinkState = dmz.defs.lookupState("No Linking")
-   , toolLink
-   , startNode
-   , noLinkObj
-   , typeCache = {}
+   // Functions
+   , _findWhiteList
+   , _isLinkable
+   , _updateNoLink
+   // Variables
+   , _firstHandle = dmz.object.create("Tool Link Node")
+   , _secondHandle = dmz.object.create("Tool Link Node")
+   , _toolLink
+   , _startNode
+   , _noLinkObj
+   , _typeCache = {}
    ;
 
 
 (function () {
-   if (firstHandle) {
-      dmz.object.activate(firstHandle);
+   if (_firstHandle) {
+      dmz.object.activate(_firstHandle);
    }
-   if (secondHandle) {
-      dmz.object.activate(secondHandle);
+   if (_secondHandle) {
+      dmz.object.activate(_secondHandle);
    }
 }());
 
-findWhiteList = function (type) {
+_findWhiteList = function (type) {
 
-   var result = typeCache[type.name()]
+   var result = _typeCache[type.name()]
      , list
      ;
 
@@ -52,13 +53,13 @@ findWhiteList = function (type) {
          else { self.log.error ("Unknown object type:", config.string("name")); }
       });
 
-      typeCache[type.name()] = result;
+      _typeCache[type.name()] = result;
    }
 
    return result;
 };
 
-isLinkable = function (source, target) {
+_isLinkable = function (source, target) {
 
    var result = false
      , stype = dmz.object.type (source)
@@ -68,7 +69,7 @@ isLinkable = function (source, target) {
 
    if (stype && ttype) {
 
-      list = findWhiteList (stype);
+      list = _findWhiteList (stype);
 
       if (list && list.some(function (type) { return ttype.isOfType(type); })) {
 
@@ -76,7 +77,7 @@ isLinkable = function (source, target) {
       }
       else {
 
-         list = findWhiteList (ttype);
+         list = _findWhiteList (ttype);
 
          if (list && list.some(function (type) { return stype.isOfType(type); })) {
 
@@ -88,22 +89,22 @@ isLinkable = function (source, target) {
    return result;
 };
 
-updateNoLink = function (handle) {
+_updateNoLink = function (handle) {
 
    var state
      ;
 
-   if (noLinkObj) {
+   if (_noLinkObj) {
 
-      state = dmz.object.state(noLinkObj);
+      state = dmz.object.state(_noLinkObj);
 
       if (state) {
 
-         dmz.object.state(noLinkObj, null, state.unset(NoLinkState));
+         dmz.object.state(_noLinkObj, null, state.unset(NoLinkState));
       }
    }
 
-   if (handle && (handle != startNode) && !isLinkable(startNode, handle)) {
+   if (handle && (handle != _startNode) && !_isLinkable(_startNode, handle)) {
 
       state = dmz.object.state(handle);
 
@@ -112,11 +113,11 @@ updateNoLink = function (handle) {
       if (state) {
 
          dmz.object.state(handle, null, state.or(NoLinkState));
-         noLinkObj = handle;
+         _noLinkObj = handle;
       }
-      else { noLinkObj = null; }
+      else { _noLinkObj = null; }
    }
-   else { noLinkObj = null; }
+   else { _noLinkObj = null; }
 };
 
 dmz.messaging.subscribe(self, "First_Link_Object_Message", function (data) {
@@ -125,13 +126,13 @@ dmz.messaging.subscribe(self, "First_Link_Object_Message", function (data) {
      , pos
      ;
 
-   if (toolLink) {
+   if (_toolLink) {
 
-      dmz.object.unlink(toolLink);
-      toolLink = null;
+      dmz.object.unlink(_toolLink);
+      _toolLink = null;
    }
 
-   startNode = null;
+   _startNode = null;
 
    if (dmz.data.isTypeOf(data)) {
 
@@ -139,18 +140,18 @@ dmz.messaging.subscribe(self, "First_Link_Object_Message", function (data) {
 
       if (handle && dmz.object.isObject(handle)) {
 
-         startNode = handle;
+         _startNode = handle;
       }
 
-      if (startNode && firstHandle && secondHandle) {
+      if (_startNode && _firstHandle && _secondHandle) {
 
-         pos = dmz.object.position(startNode);
+         pos = dmz.object.position(_startNode);
 
          if (pos) {
 
-            dmz.object.position(firstHandle, null, pos);
-            dmz.object.position(secondHandle, null, pos);
-            toolLink = dmz.object.link(NetLink, firstHandle, secondHandle);
+            dmz.object.position(_firstHandle, null, pos);
+            dmz.object.position(_secondHandle, null, pos);
+            _toolLink = dmz.object.link(NetLink, _firstHandle, _secondHandle);
          }
       }
    }
@@ -166,16 +167,16 @@ dmz.messaging.subscribe(self, "Update_Link_Position_Message", function (data) {
 
       pos = data.vector("position", 0);
 
-      if (pos && secondHandle) {
+      if (pos && _secondHandle) {
 
-         dmz.object.position(secondHandle, null, pos);
+         dmz.object.position(_secondHandle, null, pos);
       }
 
       handle = data.handle("object", 0);
 
-      if (handle && (handle != noLinkObj)) {
+      if (handle && (handle != _noLinkObj)) {
 
-         updateNoLink(handle);
+         _updateNoLink(handle);
       }
    }
 });
@@ -187,10 +188,10 @@ dmz.messaging.subscribe(self, "Second_Link_Object_Message", function (data) {
      , linkHandle
      ;
 
-   if (toolLink) {
+   if (_toolLink) {
 
-      dmz.object.unlink(toolLink);
-      toolLink = null;
+      dmz.object.unlink(_toolLink);
+      _toolLink = null;
    }
 
    if (dmz.data.isTypeOf(data)) {
@@ -199,19 +200,19 @@ dmz.messaging.subscribe(self, "Second_Link_Object_Message", function (data) {
 
       if (handle) {
 
-//self.log.warn ("isLinkable:", isLinkable(startNode, handle));
+//self.log.warn ("_isLinkable:", _isLinkable(_startNode, handle));
 
-         if (handle === startNode) {
+         if (handle === _startNode) {
 
-            startNode = null;
+            _startNode = null;
             handle = null;
          }
-         else if (dmz.object.isObject(handle) && startNode &&
-               isLinkable(startNode, handle)) {
+         else if (dmz.object.isObject(handle) && _startNode &&
+               _isLinkable(_startNode, handle)) {
 
             undo = dmz.undo.startRecord("Create Network Link");
 
-            linkHandle = dmz.object.link(NetLink, startNode, handle);
+            linkHandle = dmz.object.link(NetLink, _startNode, handle);
 
             if (dmz.object.isLink(linkHandle)) {
 
@@ -222,9 +223,9 @@ dmz.messaging.subscribe(self, "Second_Link_Object_Message", function (data) {
       }
    }
 
-   updateNoLink();
+   _updateNoLink();
 
-   startNode = null;
+   _startNode = null;
 });
 
 dmz.messaging.subscribe(self, "Failed_Link_Objects_Message", function () {
@@ -232,13 +233,13 @@ dmz.messaging.subscribe(self, "Failed_Link_Objects_Message", function () {
    var state
      ;
 
-   if (toolLink) {
+   if (_toolLink) {
 
-      dmz.object.unlink(toolLink);
-      toolLink = null;
+      dmz.object.unlink(_toolLink);
+      _toolLink = null;
    }
 
-   updateNoLink();
+   _updateNoLink();
 
-   startNode = null;
+   _startNode = null;
 });

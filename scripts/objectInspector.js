@@ -9,11 +9,10 @@ var dmz =
        , layout: require("dmz/ui/layout")
        , interface: require("dmz/runtime/interface")
        }
-  // Functions
-  , print = require("sys").puts
-  , findInspector
   // Constants
   , DockName = "Object Inspector"
+  // Functions
+  , _findInspector
   // Variables
   , _exports = {}
   , _table = {}
@@ -32,7 +31,7 @@ var dmz =
   ;
 
 
-findInspector = function (handle) {
+_findInspector = function (handle) {
 
    var result
      , type
@@ -80,14 +79,14 @@ dmz.object.flag.observe(self, dmz.object.SelectAttribute, function (handle, attr
          dmz.object.state(handle, null, state);
       }
 
-      inspector = findInspector(handle);
+      inspector = _findInspector(handle);
 
       if (inspector) {
 
          inspector.func(handle);
          _stack.currentIndex(inspector.index);
       }
-      else { _stack.currentIndex(0); print("inspector not found"); }
+      else { _stack.currentIndex(0); }
 
       _selected = handle;
    }
