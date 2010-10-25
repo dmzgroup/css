@@ -8,16 +8,17 @@ var dmz =
        , mask: require("dmz/types/mask")
        , layout: require("dmz/ui/layout")
        , interface: require("dmz/runtime/interface")
+       , util: require("dmz/types/util")
        }
   // Constants
-  , DockName = "Object Inspector"
+  , DockName = "Service Inspector"
   // Functions
   , _findInspector
   // Variables
   , _exports = {}
   , _table = {}
   , _selected
-  , _form = dmz.uiLoader.load("ObjectInspector")
+  , _form = dmz.uiLoader.load("ServiceInspector")
   , _dock = dmz.main.createDock
     (DockName
     , { area: dmz.uiConst.RightToolBarArea
@@ -46,50 +47,6 @@ _findInspector = function (handle) {
    return result;
 };
 
-dmz.object.flag.observe(self, dmz.object.SelectAttribute, function (handle, attr, value) {
-
-   var inspector
-     , state
-     ;
-
-   if (!value && (handle === _selected)) {
-
-      state = dmz.object.state(handle);
-
-      if (state) {
-
-         state = state.unset(dmz.cssConst.Select);
-         dmz.object.state(handle, null, state);
-      }
-
-      _stack.currentIndex(0);
-      _selected = undefined;
-   }
-   else if (value && (handle !== _selected)) {
-
-      state = dmz.object.state(handle);
-
-      if (!state) { state = dmz.mask.create(); }
-
-      if (state) {
-
-         state = state.or(dmz.cssConst.Select);
-         dmz.object.state(handle, null, state);
-      }
-
-      inspector = _findInspector(handle);
-
-      if (inspector) {
-
-         inspector.func(handle);
-         _stack.currentIndex(inspector.index);
-      }
-      else { _stack.currentIndex(0); }
-
-      _selected = handle;
-   }
-});
-
 dmz.object.destroy.observe(self, function (handle) {
 
    if (handle === _selected) {
@@ -99,16 +56,35 @@ dmz.object.destroy.observe(self, function (handle) {
    }
 });
 
-_exports.addInspector = function (widget, type, func) {
+_exports.currentService = function (handle) {
+
+   var inspector
+     ;
+
+   if ((handle === 0) || (dmz.util.isUndefined(handle))) { _stack.currentIndex(0); }
+   else {
+
+      inspector = _findInspector(handle);
+
+      if (inspector) {
+
+         inspector.init(handle);
+         _stack.currentIndex(inspector.index);
+      }
+      else { _stack.currentIndex(0); }
+   }
+};
+
+_exports.addInspector = function (widget, type, init) {
 
    var hbox
      ;
 
-   if (widget && type && func) {
+   if (widget && type && init) {
 
       _table[type.name()] =
          { widget: widget
-         , func: func 
+         , init: init 
          , type: type
          , index: _stack.add(widget)
          };

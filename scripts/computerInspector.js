@@ -4,6 +4,7 @@ var dmz =
        , object: require("dmz/components/object")
        , objectType: require("dmz/runtime/objectType")
        , uiLoader: require("dmz/ui/uiLoader")
+       , uiMessageBox: require('dmz/ui/messageBox')
        , interface: require("dmz/runtime/interface")
        , undo: require("inspectorUndo")
        }
@@ -20,9 +21,12 @@ var dmz =
   , _undo = dmz.undo.create("<Undefined from: " + self.name + ">")
   , _object
   , _form = dmz.uiLoader.load("ComputerInspector")
+  , _serviceDialog = dmz.uiLoader.load("ServiceSelector")
+  , _serviceBox = _serviceDialog.lookup("serviceBox")
   , _type = _form.lookup("typeLabel")
   , _name = _form.lookup("nameEdit")
   , _os = _form.lookup("osBox")
+  , _serviceList = _form.lookup("serviceList")
   ;
 
 (function () {
@@ -57,6 +61,10 @@ var dmz =
       , "Windows Embedded 7"
       ];
 
+   _serviceBox.addItem("HTTP");
+   _serviceBox.addItem("FTP");
+   _serviceBox.addItem("SSH");
+   _serviceBox.addItem("Telnet");
 })();
 
 _setOS = function (type) {
@@ -115,6 +123,52 @@ _os.observe(self, "currentIndexChanged", function (index, widget) {
    }
 });
 
+_form.observe(self, "addButton", "clicked", function () {
+
+   _serviceDialog.open (self, function (value, widget) {
+
+      var type
+        , handle
+        , data
+        ;
+
+      if (value === 1) {
+
+         type = dmz.objectType.lookup(_serviceBox.currentText());
+
+         if (type && _object) {
+
+            handle = dmz.object.create(type);
+
+            if (handle) {
+
+               dmz.object.activate(handle);
+               dmz.object.link(dmz.cssConst.ServiceAttr, _object, handle);
+               _serviceList.addItem(type.name(), handle);
+            }
+         }
+      }
+   });
+});
+
+_form.observe(self, "removeButton", "clicked", function () {
+
+   var item = _serviceList.currentItem()
+     , handle
+     ;
+
+   if (item) {
+
+      handle = item.data();
+
+      if (handle) {
+
+         dmz.object.destroy(handle);
+         _serviceList.takeItem(item);
+      }
+   }
+});
+
 dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
 
    if (Mode === dmz.interface.Activate) {
@@ -124,6 +178,7 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
            , type = dmz.object.type(handle)
+           , services = dmz.object.subLinks(handle, dmz.cssConst.ServiceAttr);
            ;
 
          _undo.clear();
@@ -139,6 +194,21 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
 
          if (os) { _os.currentText(os); }
          else { _os.currentIndex(0); }
+
+         _serviceList.clear();
+
+         if (services) {
+
+            services.forEach(function (sub) {
+
+               var type = dmz.object.type(sub);
+
+               if (type) {
+
+                  _serviceList.addItem(type.name(), sub);
+               }
+            });
+         }
 
          _object = handle;
       }); 

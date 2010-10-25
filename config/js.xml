@@ -23,6 +23,7 @@
    <instance name="internetInspector"/>
    <instance name="switchInspector"/>
    <instance name="malwareInspector"/>
+   <instance name="serviceInspector"/>
    <instance name="fileMenu"/>
    <instance name="editMenu"/>
    <instance name="create"/>
