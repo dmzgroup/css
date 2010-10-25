@@ -22,12 +22,12 @@ reset = function () {
    dmz.undo.reset ();
 };
 
-dmz.main.addMenu (self, "&File", "New", "Ctrl+n", function (obj) {
-
+dmz.main.addMenu (self, "&File", "New", { shortcut: "new" }, function (obj) {
+   
    reset ();
 });
 
-dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
+dmz.main.addMenu (self, "&File", "Open", { shortcut: "open" }, function (obj) {
 
    var data
      , archive
@@ -37,8 +37,8 @@ dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
    reset ();
 
    file = dmz.fileDialog.getOpenFileName(
-      dmz.main.mainWidget(),
-      { caption: "Load file", filter: "Data File (*.csdf)" });
+      { caption: "Load file", filter: "Data File (*.csdf)" }, 
+      dmz.main.window());
 
    if (file) {
 
@@ -58,12 +58,12 @@ dmz.main.addMenu (self, "&File", "Open", "Ctrl+o", function (obj) {
 
 dmz.main.addSeparator("&File");
 
-dmz.main.addMenu(self, "&File", "Save", "Ctrl+s", function (obj) {
+dmz.main.addMenu(self, "&File", "Save", { shortcut: "save" }, function (obj) {
 
    if (saveAsAction) { saveAsAction.trigger(); }
 });
 
-saveAsAction = dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", function (obj) {
+saveAsAction = dmz.main.addMenu(self, "&File", "Save As", { shortcut: "saveas" }, function (obj) {
 
    var data
      , name
@@ -75,8 +75,8 @@ saveAsAction = dmz.main.addMenu(self, "&File", "Save As", "Ctrl+Shift+s", functi
    if (data) {
 
       name = dmz.fileDialog.getSaveFileName(
-         dmz.main.mainWidget(),
-         { caption: "Save file", filter: "Data File (*.csdf)" });
+         { caption: "Save file", filter: "Data File (*.csdf)" },
+         dmz.main.window());
 
       if (name) {
 
