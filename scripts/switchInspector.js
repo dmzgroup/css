@@ -7,9 +7,9 @@ var dmz =
        , interface: require("dmz/runtime/interface")
        , undo: require("inspectorUndo")
        }
-  // Functions
   // Constants
   , NodeType = dmz.objectType.lookup("Network Node")
+  // Functions
   // Variables
   , _inUpdate = false
   , _undo = dmz.undo.create("<Undefined from: " + self.name + ">")

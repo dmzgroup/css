@@ -52,8 +52,8 @@
          <items>
             <group name="base node">
                <image name="node" resource="base"/>
-               <image name="node-select" resource="selected"/>
                <image name="node-highlight" resource="highlight"/>
+               <image name="node-select" resource="selected"/>
                <text name="name">
                   <textColor>
                      <string value="white"/>
@@ -84,12 +84,12 @@
                <item name="node"/>
                <item name="name"/>
             </state>
-            <state name="Selected" group="base node">
-               <item name="node-select"/>
-               <item name="name"/>
-            </state>
             <state name="Highlight" group="base node">
                <item name="node-highlight"/>
+               <item name="name"/>
+            </state>
+            <state name="Selected" group="base node">
+               <item name="node-select"/>
                <item name="name"/>
             </state>
             <state name="No Linking" group="link mode">

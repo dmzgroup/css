@@ -9,46 +9,46 @@ var dmz =
   , UndoStr = "Undo"
   , RedoStr = "Redo"
   // Variables
-  , undoAction
-  , redoAction
+  , _undoAction
+  , _redoAction
   ;
 
-undoAction = dmz.main.addMenu(self, "&Edit", UndoStr, { shortcut: "undo" }, function (action) {
+_undoAction = dmz.main.addMenu(self, "&Edit", UndoStr, { shortcut: "undo" }, function (action) {
 
    dmz.undo.doNext(dmz.undo.Undo);
 });
 
-undoAction.enabled(false);
+_undoAction.enabled(false);
 
-redoAction = dmz.main.addMenu(self, "&Edit", RedoStr, { shortcut: "redo" }, function (action) {
+_redoAction = dmz.main.addMenu(self, "&Edit", RedoStr, { shortcut: "redo" }, function (action) {
 
    dmz.undo.doNext(dmz.undo.Redo);
 });
 
-redoAction.enabled(false);
+_redoAction.enabled(false);
 
 dmz.undo.observe(self, dmz.undo.Names, function (undoName, redoName) {
 
    if (undoName) {
 
-      undoAction.text(UndoStr + " " + undoName);
-      undoAction.enabled(true);
+      _undoAction.text(UndoStr + " " + undoName);
+      _undoAction.enabled(true);
    }
    else {
 
-      undoAction.text(UndoStr);
-      undoAction.enabled(false);
+      _undoAction.text(UndoStr);
+      _undoAction.enabled(false);
    }
 
 
    if (redoName) {
 
-      redoAction.text(RedoStr + " " + redoName);
-      redoAction.enabled(true);
+      _redoAction.text(RedoStr + " " + redoName);
+      _redoAction.enabled(true);
    }
    else {
 
-      redoAction.text(RedoStr);
-      redoAction.enabled(false);
+      _redoAction.text(RedoStr);
+      _redoAction.enabled(false);
    }
 });

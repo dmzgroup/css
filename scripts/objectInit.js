@@ -3,9 +3,9 @@ var dmz =
        , object: require("dmz/components/object")
        , interface: require("dmz/runtime/interface")
        }
+  // Constants
   // Functions
   , _findInit
-  // Constants
   // Variables
   , _exports = {}
   , _table = {}
