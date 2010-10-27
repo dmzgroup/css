@@ -46,7 +46,9 @@
    </dock-windows>
 </main-window>
 <tool-name>
+<!--
    <layout vertical="true"/>
+-->
    <channel name="move-tool" message="Update_Tool_Name" isect="false"> 
       <attribute type="string" name="String">
          <element value="Move"/>

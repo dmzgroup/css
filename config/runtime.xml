@@ -156,5 +156,15 @@
          </template>
       </canvas-object-basic>
    </object-type>
+   <object-type name="Service" parent="Software">
+   </object-type>
+   <object-type name="HTTP" parent="Service">
+   </object-type>
+   <object-type name="FTP" parent="Service">
+   </object-type>
+   <object-type name="SSH" parent="Service">
+   </object-type>
+   <object-type name="Telnet" parent="Service">
+   </object-type>
 </runtime>
 </dmz>

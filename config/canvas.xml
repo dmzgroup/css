@@ -30,7 +30,7 @@
 </main-window>
 <canvas>
    <canvas opengl="false" antialiasing="true" textantialiasing="true">
-      <zoom default="1.0"/>
+      <zoom min="0.5" max="2.0" default="0.5" step="0.5"/>
    </canvas>
    <scene>
       <background grid="true"/>
@@ -52,9 +52,8 @@
          <items>
             <group name="base node">
                <image name="node" resource="base"/>
-               <image name="node-select" resource="selected"/>
                <image name="node-highlight" resource="highlight"/>
-<!--
+               <image name="node-select" resource="selected"/>
                <text name="name">
                   <textColor>
                      <string value="white"/>
@@ -68,38 +67,30 @@
                      <string value="black"/>
                      <alpha value="0.75"/>
                   </backgroundColor>
-                  <translate x="0" y="50"/>
+                  <translate name="node" x="0" y="30"/>
                   <alignment value="center"/>
+                  <scale x="1.5" y="1.5"/>
                </text>
--->
             </group>
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
             </group>
          </items>
          <text>
-<!--
             <item name="name" attribute="Name"/>
--->
          </text>
          <switch>
             <state group="base node">
                <item name="node"/>
-<!--
                <item name="name"/>
--->
             </state>
             <state name="Highlight" group="base node">
                <item name="node-highlight"/>
-<!--
                <item name="name"/>
--->
             </state>
             <state name="Selected" group="base node">
                <item name="node-select"/>
-<!--
                <item name="name"/>
--->
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
@@ -112,6 +103,9 @@
    <link name="Network Link"/>
    <pen-width value="4"/>
 </canvas-link>
+<canvas-zoom>
+   <zoom min="0.2" max="2.0" default="0.5"/>
+</canvas-zoom>
 <icon-pallet>
    <use-session value="false"/>
 </icon-pallet>

@@ -30,7 +30,6 @@ dmz.messaging.subscribe(self, "Drop_Create_Message",  function (data) {
          undo = dmz.undo.startRecord("Create: " + currentType);
          obj = dmz.object.create(currentType);
          dmz.object.position(obj, null, pos);
-         dmz.object.text(obj, dmz.cssConst.NameAttr, currentType.name());
          dmz.object.activate(obj);
          dmz.object.select(obj);
          dmz.undo.stopRecord(undo);

@@ -17,11 +17,13 @@
    <path value="./scripts"/>
    <path value="./ui"/>
    <path value="../js/scripts"/>
+   <instance name="objectInit"/>
    <instance name="objectInspector"/>
    <instance name="computerInspector"/>
    <instance name="internetInspector"/>
    <instance name="switchInspector"/>
    <instance name="malwareInspector"/>
+   <instance name="serviceInspector"/>
    <instance name="fileMenu"/>
    <instance name="editMenu"/>
    <instance name="create"/>

@@ -7,9 +7,9 @@ var dmz =
        , interface: require("dmz/runtime/interface")
        , undo: require("inspectorUndo")
        }
-  // Functions
   // Constants
   , NodeType = dmz.objectType.lookup("Network Node")
+  // Functions
   // Variables
   , _inUpdate = false
   , _undo = dmz.undo.create("<Undefined from: " + self.name + ">")
@@ -57,9 +57,22 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, Interface) {
    }
 });
 
+dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
+
+   if (Mode === dmz.interface.Activate) {
+
+      interface.addInit(NodeType, function (handle, type) {
+
+         dmz.object.text(
+            handle,
+            dmz.cssConst.NameAttr,
+            type.name() + interface.counter());
+      });
+   }
+});
+
 dmz.object.text.observe(self, dmz.cssConst.NameAttr, function (handle, attr, value) {
 
-//self.log.error(_object, handle, value);
-   if (!_inUpdate && handle === _object) { _name.text(value); }
+   if (!_inUpdate && (handle === _object)) { _name.text(value); }
 });
 

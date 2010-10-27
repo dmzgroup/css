@@ -5,9 +5,10 @@ var dmz =
        , undo: require("dmz/runtime/undo")
        , vector: require("dmz/types/vector")
        }
-  , firstMove = false
-  , item
-  , offset
+  // Variables
+  , _firstMove = false
+  , _item
+  , _offset
   ;
 
 dmz.messaging.subscribe(self, "Select_Object_Message", function (data) {
@@ -20,34 +21,34 @@ dmz.messaging.subscribe(self, "Select_Move_Object_Message", function (data) {
    var pos
      ;
 
-   firstMove = true;
+   _firstMove = true;
 
    if (data) {
 
-      item = data.handle("object", 0);
-      offset = data.vector("position", 0);
-      dmz.object.select(item);
+      _item = data.handle("object", 0);
+      _offset = data.vector("position", 0);
+      dmz.object.select(_item);
 
-      if (item && offset && dmz.object.isObject(item)) {
+      if (_item && _offset && dmz.object.isObject(_item)) {
 
-         pos = dmz.object.position(item)
+         pos = dmz.object.position(_item)
 
-         if (pos) { offset = pos.subtract(offset); }
-         else { offset = dmz.vector.create(); }
+         if (pos) { _offset = pos.subtract(_offset); }
+         else { _offset = dmz.vector.create(); }
       }
       else {
 
-         item = null;
-         offset = null;
+         _item = null;
+         _offset = null;
       }
    }
 });
 
 dmz.messaging.subscribe(self, "Unselect_Move_Object_Message", function (data) {
 
-   item = null;
-   offset = null;
-   firstMove = false;
+   _item = null;
+   _offset = null;
+   _firstMove = false;
 });
 
 dmz.messaging.subscribe(self, "Move_Selected_Object_Message", function (data) {
@@ -56,19 +57,19 @@ dmz.messaging.subscribe(self, "Move_Selected_Object_Message", function (data) {
      , pos
      ;
 
-   if (item && data) {
+   if (_item && data) {
 
-      if (firstMove) {
+      if (_firstMove) {
 
          undo = dmz.undo.startRecord("Move Node");
-         firstMove = false;
+         _firstMove = false;
       }
 
       pos = data.vector("position", 0);
 
-      if (item && pos) {
+      if (_item && pos) {
 
-         dmz.object.position(item, null, pos.add(offset));
+         dmz.object.position(_item, null, pos.add(_offset));
       }
 
       if (undo) {  dmz.undo.stopRecord(undo); }
