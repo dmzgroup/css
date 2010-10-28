@@ -5,7 +5,7 @@ var dmz =
        , objectType: require("dmz/runtime/objectType")
        , uiLoader: require("dmz/ui/uiLoader")
        , uiMessageBox: require('dmz/ui/messageBox')
-       , interface: require("dmz/runtime/interface")
+       , module: require("dmz/runtime/module")
        , undo: require("inspectorUndo")
        }
   // Constants
@@ -169,11 +169,11 @@ _form.observe(self, "removeButton", "clicked", function () {
    }
 });
 
-dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
+dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
 
-   if (Mode === dmz.interface.Activate) {
+   if (Mode === dmz.module.Activate) {
 
-      interface.addInspector(_form, ComputerType, function (handle) {
+      module.addInspector(_form, ComputerType, function (handle) {
 
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
@@ -215,11 +215,11 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
    }
 });
 
-dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
+dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
-   if (Mode === dmz.interface.Activate) {
+   if (Mode === dmz.module.Activate) {
 
-      interface.addInit(ComputerType, function (handle, type) {
+      module.addInit(ComputerType, function (handle, type) {
 
          var os = "Unknown"
            , list = _getOS(type);
@@ -230,7 +230,7 @@ dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
          dmz.object.text(
             handle,
             dmz.cssConst.NameAttr,
-            type.name() + interface.counter());
+            type.name() + module.counter());
 
          if (os) { dmz.object.text(handle, dmz.cssConst.OSAttr, os); }
       }); 
