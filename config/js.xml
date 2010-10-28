@@ -11,7 +11,7 @@
    <plugin name="dmzJsExtV8Script" scope="javascript"/>
    <plugin name="dmzJsExtV8File" scope="javascript"/>
    <plugin name="dmzJsExtV8ConfigIO" scope="javascript"/>
-   <plugin name="dmzJsExtV8Interface" scope="javascript"/>
+   <plugin name="dmzJsExtV8Module" scope="javascript"/>
 </plugin-list>
 <javascript>
    <path value="./scripts"/>
