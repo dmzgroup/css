@@ -4,7 +4,7 @@ var dmz =
        , object: require("dmz/components/object")
        , objectType: require("dmz/runtime/objectType")
        , uiLoader: require("dmz/ui/uiLoader")
-       , interface: require("dmz/runtime/interface")
+       , module: require("dmz/runtime/module")
        , undo: require("dmz/runtime/undo")
        }
   // Constants
@@ -39,11 +39,11 @@ _ip.observe(self, "currentIndexChanged", function (index, widget) {
    }
 });
 
-dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
+dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
 
-   if (Mode === dmz.interface.Activate) {
+   if (Mode === dmz.module.Activate) {
 
-      interface.addInspector(_form, InternetType, function (handle) {
+      module.addInspector(_form, InternetType, function (handle) {
 
          var type = dmz.object.type(handle)
            , ipv = dmz.object.text(handle, dmz.cssConst.IPVAttr);
@@ -63,11 +63,11 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, interface) {
 });
 
 
-dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
+dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
-   if (Mode === dmz.interface.Activate) {
+   if (Mode === dmz.module.Activate) {
 
-      interface.addInit(InternetType, function (handle, type) {
+      module.addInit(InternetType, function (handle, type) {
 
          dmz.object.text(handle, dmz.cssConst.IPVAttr, "4");
       }); 

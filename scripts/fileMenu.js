@@ -6,6 +6,7 @@ var dmz =
        , main: require("dmz/ui/mainWindow")
        , messaging: require("dmz/runtime/messaging")
        , undo: require("dmz/runtime/undo")
+       , zip: require("dmz/system/zip")
        }
   // Constants
   , FileExt = ".csdf"
@@ -63,7 +64,8 @@ dmz.main.addMenu(self, "&File", "Save", { shortcut: "save" }, function (obj) {
    if (_saveAsAction) { _saveAsAction.trigger(); }
 });
 
-_saveAsAction = dmz.main.addMenu(self, "&File", "Save As", { shortcut: "saveas" }, function (obj) {
+_saveAsAction = dmz.main.addMenu(self, "&File", "Save As", { shortcut: "saveas" },
+function (obj) {
 
    var data
      , name

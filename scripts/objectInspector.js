@@ -7,7 +7,7 @@ var dmz =
        , dock: require("dmz/ui/dockWidget")
        , mask: require("dmz/types/mask")
        , layout: require("dmz/ui/layout")
-       , interface: require("dmz/runtime/interface")
+       , module: require("dmz/runtime/module")
        }
   // Constants
   , DockName = "Object Inspector"
@@ -115,5 +115,5 @@ _exports.addInspector = function (widget, type, func) {
    }
 };
 
-// Publish interface
-dmz.interface.publish(self, _exports);
+// Publish module
+dmz.module.publish(self, _exports);

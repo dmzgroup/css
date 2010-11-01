@@ -1,7 +1,7 @@
 var dmz =
        { cssConst: require("cssConst")
        , object: require("dmz/components/object")
-       , interface: require("dmz/runtime/interface")
+       , module: require("dmz/runtime/module")
        }
   // Constants
   // Functions
@@ -52,5 +52,5 @@ _exports.counter = function () {
    return result;
 };
 
-// Publish interface
-dmz.interface.publish(self, _exports);
+// Publish module
+dmz.module.publish(self, _exports);

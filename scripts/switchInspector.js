@@ -4,7 +4,7 @@ var dmz =
        , object: require("dmz/components/object")
        , objectType: require("dmz/runtime/objectType")
        , uiLoader: require("dmz/ui/uiLoader")
-       , interface: require("dmz/runtime/interface")
+       , module: require("dmz/runtime/module")
        , undo: require("inspectorUndo")
        }
   // Constants
@@ -33,11 +33,11 @@ _name.observe(self, "textChanged", function(value, widget) {
    }
 });
 
-dmz.interface.subscribe(self, "objectInspector", function (Mode, Interface) {
+dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
 
-   if (Mode === dmz.interface.Activate) {
+   if (Mode === dmz.module.Activate) {
 
-      Interface.addInspector(_form, NodeType, function (handle) {
+      module.addInspector(_form, NodeType, function (handle) {
 
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , type = dmz.object.type(handle)
@@ -57,16 +57,16 @@ dmz.interface.subscribe(self, "objectInspector", function (Mode, Interface) {
    }
 });
 
-dmz.interface.subscribe(self, "objectInit", function (Mode, interface) {
+dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
-   if (Mode === dmz.interface.Activate) {
+   if (Mode === dmz.module.Activate) {
 
-      interface.addInit(NodeType, function (handle, type) {
+      module.addInit(NodeType, function (handle, type) {
 
          dmz.object.text(
             handle,
             dmz.cssConst.NameAttr,
-            type.name() + interface.counter());
+            type.name() + module.counter());
       });
    }
 });
