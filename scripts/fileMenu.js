@@ -29,6 +29,7 @@ _reset = function () {
 
    _cleanup.send ();
    dmz.undo.reset ();
+   if (_attack) { _attack.clear(); }
 };
 
 dmz.main.addMenu (self, "&File", "New", { shortcut: "new" }, function (obj) {
