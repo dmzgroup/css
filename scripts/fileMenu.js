@@ -5,6 +5,7 @@ var dmz =
        , io: require("dmz/runtime/configIO")
        , main: require("dmz/ui/mainWindow")
        , messaging: require("dmz/runtime/messaging")
+       , module: require("dmz/runtime/module")
        , undo: require("dmz/runtime/undo")
        , zip: require("dmz/system/zip")
        }
@@ -15,7 +16,14 @@ var dmz =
   // Variables
   , _cleanup = dmz.messaging.create("CleanupObjectsMessage")
   , _saveAsAction
+  , _attack
   ;
+
+dmz.module.subscribe(self, "attackScripts", function (Mode, module) {
+
+   if (Mode === dmz.module.Activate) { _attack = module; }
+   else if (Mode === dmz.module.Deactivate) { _attack = undefined; }
+});
 
 _reset = function () {
 
