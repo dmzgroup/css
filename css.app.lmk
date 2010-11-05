@@ -35,7 +35,8 @@ lmk.add_vars ({
       {"QtGui.framework/Versions/4/QtGui", "@executable_path/../Frameworks/Qt/QtGui"},
       {"QtXml.framework/Versions/4/QtXml", "@executable_path/../Frameworks/Qt/QtXml"},
       {"QtSvg.framework/Versions/4/QtSvg", "@executable_path/../Frameworks/Qt/QtSvg"},
-      {"QtOpenGL.framework/Versions/4/QtOpenGL", "@executable_path/../Frameworks/Qt/QtOpenGL"},
+      {"QtOpenGL.framework/Versions/4/QtOpenGL",
+       "@executable_path/../Frameworks/Qt/QtOpenGL"},
       {"libv8.dylib", "@executable_path/../Frameworks/v8/libv8.dylib"},
    },
 }
