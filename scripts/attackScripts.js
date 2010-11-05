@@ -163,7 +163,7 @@ _exports.load = function (file) {
    try {
 
       if (listStr) { list = JSON.parse(listStr); }
-      else { self.log.error("Failed load JSON file:", ListFileName); }
+      else { self.log.error("Failed to load JSON file:", ListFileName); }
    }
    catch (error) {
 
@@ -204,10 +204,8 @@ _exports.save = function () {
       }
    }
 
-   if (list.length > 0) {
 
-      result.push({name: ListFileName, data: JSON.stringify(list)});
-   }
+   result.push({name: ListFileName, data: JSON.stringify(list)});
 
    return result;
 };
