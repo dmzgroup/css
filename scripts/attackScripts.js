@@ -7,7 +7,7 @@ var dmz =
        , messaging: require("dmz/runtime/messaging")
        , messageBox: require("dmz/ui/messageBox")
        , module: require("dmz/runtime/module")
-       , script: require("dmz/components/script")
+       , script: require("dmz/runtime/script")
        , uiConst: require("dmz/ui/consts")
        , uiLoader: require("dmz/ui/uiLoader")
        , undo: require("dmz/runtime/undo")

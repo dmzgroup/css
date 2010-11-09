@@ -1,5 +1,5 @@
 var dmz =
-       { script: require("dmz/components/script")
+       { script: require("dmz/runtime/script")
        }
   , handle
   , instance

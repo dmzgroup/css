@@ -173,7 +173,7 @@ dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
 
    if (Mode === dmz.module.Activate) {
 
-      module.addInspector(_form, ComputerType, function (handle) {
+      module.addInspector(self, _form, ComputerType, function (handle) {
 
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
@@ -219,7 +219,7 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
    if (Mode === dmz.module.Activate) {
 
-      module.addInit(ComputerType, function (handle, type) {
+      module.addInit(self, ComputerType, function (handle, type) {
 
          var os = "Unknown"
            , list = _getOS(type);

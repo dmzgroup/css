@@ -43,7 +43,7 @@ dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
 
    if (Mode === dmz.module.Activate) {
 
-      module.addInspector(_form, InternetType, function (handle) {
+      module.addInspector(self, _form, InternetType, function (handle) {
 
          var type = dmz.object.type(handle)
            , ipv = dmz.object.text(handle, dmz.cssConst.IPVAttr);
@@ -67,7 +67,7 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
    if (Mode === dmz.module.Activate) {
 
-      module.addInit(InternetType, function (handle, type) {
+      module.addInit(self, InternetType, function (handle, type) {
 
          dmz.object.text(handle, dmz.cssConst.IPVAttr, "4");
       }); 
