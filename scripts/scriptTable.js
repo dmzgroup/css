@@ -61,8 +61,7 @@ function (name, handle, script, file) {
 
          if (item.text(0) === handle.toString()) {
 
-self.log.error("Remove", item.text(0), item.text(1), item.text(2), item.text(3));
-            _table.takeItemAt(item.indexOf());
+            _table.takeItemAt(_table.indexOf(item));
          }
       });
    }

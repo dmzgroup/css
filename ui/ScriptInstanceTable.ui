@@ -56,16 +56,9 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QPushButton" name="unloadButton">
+      <widget class="QPushButton" name="loadButton">
        <property name="text">
-        <string>Unload</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="reloadButton">
-       <property name="text">
-        <string>Reload</string>
+        <string>Load</string>
        </property>
       </widget>
      </item>
@@ -83,9 +76,16 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="loadButton">
+      <widget class="QPushButton" name="unloadButton">
        <property name="text">
-        <string>Load</string>
+        <string>Unload</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="reloadButton">
+       <property name="text">
+        <string>Reload</string>
        </property>
       </widget>
      </item>

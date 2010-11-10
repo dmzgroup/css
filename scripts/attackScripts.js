@@ -1,5 +1,3 @@
-self.log.error("RELOADED");
-
 var dmz =
        { archive: require("dmz/components/archive")
        , file: require("dmz/system/file")
