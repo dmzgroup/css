@@ -2,6 +2,7 @@ var dmz =
        { cssConst: require("cssConst")
        , object: require("dmz/components/object")
        , module: require("dmz/runtime/module")
+       , script: require("dmz/runtime/script")
        }
   // Constants
   // Functions
@@ -9,6 +10,7 @@ var dmz =
   // Variables
   , _exports = {}
   , _table = {}
+  , _selfTable = {}
   , _count = 1
   ;
 
@@ -34,14 +36,27 @@ dmz.object.create.observe(self, function (handle, type) {
    if (init && init.func) { init.func(handle, type); }
 });
 
-_exports.addInit = function (type, func) {
+dmz.script.observe(self, function (name) {
 
-   if (type && func) {
+   var TypeName = _selfTable[name];
+
+   if (TypeName) {
+
+      delete _table[TypeName];
+      delete _selfTable[name];
+   }
+});
+
+_exports.addInit = function (obj, type, func) {
+
+   if (obj && obj.name && type && func) {
 
       _table[type.name()] =
          { func: func 
          , type: type
          };
+
+      _selfTable[obj.name] = type.name();
    }
 };
 

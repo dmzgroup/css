@@ -9,6 +9,7 @@ var dmz =
        , layout: require("dmz/ui/layout")
        , module: require("dmz/runtime/module")
        , util: require("dmz/types/util")
+       , script: require("dmz/runtime/script")
        }
   // Constants
   , DockName = "Service Inspector"
@@ -17,6 +18,7 @@ var dmz =
   // Variables
   , _exports = {}
   , _table = {}
+  , _selfTable = {}
   , _selected
   , _form = dmz.uiLoader.load("ServiceInspector")
   , _dock = dmz.main.createDock
@@ -75,12 +77,9 @@ _exports.currentService = function (handle) {
    }
 };
 
-_exports.addInspector = function (widget, type, init) {
+_exports.addInspector = function (obj, widget, type, init) {
 
-   var hbox
-     ;
-
-   if (widget && type && init) {
+   if (obj && obj.name && widget && type && init) {
 
       _table[type.name()] =
          { widget: widget
@@ -88,8 +87,21 @@ _exports.addInspector = function (widget, type, init) {
          , type: type
          , index: _stack.add(widget)
          };
+
+      _selfTable[obj.name] = type.name();
    }
 };
+
+dmz.script.observe(self, function (name) {
+
+   var TypeName = _selfTable[name];
+
+   if (TypeName) {
+
+      delete _table[TypeName];
+      delete _selfTable[name];
+   }
+});
 
 // Publish module
 dmz.module.publish(self, _exports);

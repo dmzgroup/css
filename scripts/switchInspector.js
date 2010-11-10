@@ -37,7 +37,7 @@ dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
 
    if (Mode === dmz.module.Activate) {
 
-      module.addInspector(_form, NodeType, function (handle) {
+      module.addInspector(self, _form, NodeType, function (handle) {
 
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , type = dmz.object.type(handle)
@@ -61,7 +61,7 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
    if (Mode === dmz.module.Activate) {
 
-      module.addInit(NodeType, function (handle, type) {
+      module.addInit(self, NodeType, function (handle, type) {
 
          dmz.object.text(
             handle,

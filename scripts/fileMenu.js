@@ -1,26 +1,37 @@
 var dmz =
        { archive: require("dmz/components/archive")
+       , config: require("dmz/runtime/config")
        , file: require("dmz/system/file")
        , fileDialog: require("dmz/ui/fileDialog")
        , io: require("dmz/runtime/configIO")
        , main: require("dmz/ui/mainWindow")
        , messaging: require("dmz/runtime/messaging")
+       , module: require("dmz/runtime/module")
        , undo: require("dmz/runtime/undo")
        , zip: require("dmz/system/zip")
        }
   // Constants
+  , CSSFile = "css.xml"
   , FileExt = ".csdf"
   // Functions
   , _reset
   // Variables
   , _cleanup = dmz.messaging.create("CleanupObjectsMessage")
   , _saveAsAction
+  , _attack
   ;
+
+dmz.module.subscribe(self, "attackScripts", function (Mode, module) {
+
+   if (Mode === dmz.module.Activate) { _attack = module; }
+   else if (Mode === dmz.module.Deactivate) { _attack = undefined; }
+});
 
 _reset = function () {
 
    _cleanup.send ();
    dmz.undo.reset ();
+   if (_attack) { _attack.clear(); }
 };
 
 dmz.main.addMenu (self, "&File", "New", { shortcut: "new" }, function (obj) {
@@ -43,9 +54,13 @@ dmz.main.addMenu (self, "&File", "Open", { shortcut: "open" }, function (obj) {
 
    if (file) {
 
+      file = file[0];
+
       self.log.error (file);
 
-      data = dmz.io.read({ archive: file, file: "css.xml", log: self.log});
+      if (_attack) { _attack.load(file); }
+
+      data = dmz.io.read({archive: file, file: CSSFile, log: self.log});
 
       if (data) {
 
@@ -67,14 +82,15 @@ dmz.main.addMenu(self, "&File", "Save", { shortcut: "save" }, function (obj) {
 _saveAsAction = dmz.main.addMenu(self, "&File", "Save As", { shortcut: "saveas" },
 function (obj) {
 
-   var data
+   var archive
      , name
      , split
+     , list
      ;
 
-   data = dmz.archive.create();
+   archive = dmz.archive.create();
 
-   if (data) {
+   if (archive) {
 
       name = dmz.fileDialog.getSaveFileName(
          { caption: "Save file", filter: "Data File (*.csdf)" },
@@ -96,7 +112,19 @@ function (obj) {
 
          self.log.error(name);
 
-         dmz.io.write ({ data: data, archive: name, file: "css.xml"});
+         list = 
+            [ {name: dmz.zip.ManifestFileName, config: dmz.zip.manifest (CSSFile)}
+            , {name: CSSFile, config: archive}
+            ];
+
+         if (_attack) { list = list.concat(_attack.save()); }
+
+self.log.warn(JSON.stringify(list));
+
+         if (!dmz.zip.write(name, list)) {
+
+            self.log.error ("Failed to create file:", name);
+         }
       }
    }
    else { self.log.error("No archive created"); }
