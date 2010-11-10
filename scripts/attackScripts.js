@@ -44,6 +44,8 @@ var dmz =
   , _list = _form.lookup("fileList")
   ;
 
+self.shutdown = function () { dmz.main.removeDock(DockName); };
+
 _compile_script = function (item) {
 
    var data = item ? item.data() : undefined
