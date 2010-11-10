@@ -1,3 +1,5 @@
+self.log.error("RELOADED");
+
 var dmz =
        { archive: require("dmz/components/archive")
        , file: require("dmz/system/file")
@@ -43,6 +45,8 @@ var dmz =
        )
   , _list = _form.lookup("fileList")
   ;
+
+self.shutdown = function () { dmz.main.removeDock(DockName); };
 
 _compile_script = function (item) {
 

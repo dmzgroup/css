@@ -32,6 +32,7 @@ var dmz =
   , _stack = _form.lookup("stack")
   ;
 
+self.shutdown = function () { dmz.main.removeDock(DockName); };
 
 _findInspector = function (handle) {
 
