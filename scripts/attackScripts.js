@@ -46,6 +46,17 @@ var dmz =
 
 self.shutdown = function () { dmz.main.removeDock(DockName); };
 
+dmz.script.observe(self, dmz.script.InstanceDestroy,
+function (name, handle, script, file) {
+
+   var found = _list.findItems(file);
+
+   if (found && (found.length > 0)) {
+
+      found.forEach(function(item) { _list.takeItem(item); });
+   }
+});
+
 _compile_script = function (item) {
 
    var data = item ? item.data() : undefined
