@@ -1,5 +1,6 @@
 var dmz =
-      { data: require("dmz/runtime/data")
+      { consts: require("cssConst")
+      , data: require("dmz/runtime/data")
       , defs: require("dmz/runtime/definitions")
       , mask: require("dmz/types/mask")
       , messaging: require("dmz/runtime/messaging")
@@ -9,8 +10,6 @@ var dmz =
       }
    // Constants
    , NetType = dmz.objectType.lookup("Network Node")
-   , NetLink = dmz.defs.createNamedHandle("Network Link")
-   , NoLinkState = dmz.defs.lookupState("No Linking")
    // Functions
    , _findWhiteList
    , _isLinkable
@@ -100,7 +99,7 @@ _updateNoLink = function (handle) {
 
       if (state) {
 
-         dmz.object.state(_noLinkObj, null, state.unset(NoLinkState));
+         dmz.object.state(_noLinkObj, null, state.unset(dmz.consts.NoLink));
       }
    }
 
@@ -112,7 +111,7 @@ _updateNoLink = function (handle) {
 
       if (state) {
 
-         dmz.object.state(handle, null, state.or(NoLinkState));
+         dmz.object.state(handle, null, state.or(dmz.consts.NoLink));
          _noLinkObj = handle;
       }
       else { _noLinkObj = null; }
@@ -151,7 +150,7 @@ dmz.messaging.subscribe(self, "First_Link_Object_Message", function (data) {
 
             dmz.object.position(_firstHandle, null, pos);
             dmz.object.position(_secondHandle, null, pos);
-            _toolLink = dmz.object.link(NetLink, _firstHandle, _secondHandle);
+            _toolLink = dmz.object.link(dmz.consts.NetLink, _firstHandle, _secondHandle);
          }
       }
    }
@@ -212,7 +211,7 @@ dmz.messaging.subscribe(self, "Second_Link_Object_Message", function (data) {
 
             undo = dmz.undo.startRecord("Create Network Link");
 
-            linkHandle = dmz.object.link(NetLink, _startNode, handle);
+            linkHandle = dmz.object.link(dmz.consts.NetLink, _startNode, handle);
 
             if (dmz.object.isLink(linkHandle)) {
 
