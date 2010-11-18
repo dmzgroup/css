@@ -9,10 +9,12 @@ var dmz =
        , undo: require("inspectorUndo")
        }
   // Constants
+  , OSType = dmz.objectType.lookup("OS")
   , ComputerType = dmz.objectType.lookup("Computer")
   , PhoneType = dmz.objectType.lookup("Phone")
   , TabletType = dmz.objectType.lookup("Tablet")
   // Functions
+  , _initOS
   , _setOS
   , _getOS
   // Variables
@@ -29,43 +31,37 @@ var dmz =
   , _serviceList = _form.lookup("serviceList")
   ;
 
-(function () {
+_initOS = function (type) {
 
-   _osTable[ComputerType.name()] =
-      [ "Windows 7"
-      , "Windows Vista"
-      , "Windows XP"
-      , "Mac OS X 10.6"
-      , "Mac OS X 10.5"
-      , "Mac OS X 10.4"
-      , "Linux"
-      , "Solaris"
-      , "Aix"
-      ];
+    var children = type.children()
+     ;
 
-   _osTable[PhoneType.name()] =
-      [ "Blackberry OS"
-      , "Android"
-      , "iOS 4"
-      , "Symbian"
-      , "WebOS"
-      , "Windows Phone 7"
-      , "Windows Mobile 6"
-      ];
+   type.config().get("support").forEach(function (config) {
 
-   _osTable[TabletType.name()] =
-      [ "iOS 4"
-      , "Android"
-      , "WebOS"
-      , "Windows 7"
-      , "Windows Embedded 7"
-      ];
+      var support = config.objectType("type")
+        , name
+        , list
+        ;
 
-   _serviceBox.addItem("HTTP");
-   _serviceBox.addItem("FTP");
-   _serviceBox.addItem("SSH");
-   _serviceBox.addItem("Telnet");
-})();
+      if (support) {
+
+         name = support.name();
+         list = _osTable[name];
+
+         if (!list) {
+
+            list = [];
+            _osTable[name] = list;
+         }
+ 
+         if (list) { list.push(type.name()); }
+      }
+   });
+
+   if (children) { children.forEach(_initOS); }
+};
+
+(function () { _initOS(OSType); })();
 
 _setOS = function (type) {
 
@@ -117,6 +113,11 @@ _os.observe(self, "currentIndexChanged", function (index, widget) {
       _undo.start(widget, "Edit Operating System");
 
       dmz.object.text(_object, dmz.cssConst.OSAttr, _os.itemText(index));
+
+      dmz.object.altType(
+         _object,
+         dmz.cssConst.OSAttr,
+         dmz.objectType.lookup(_os.itemText(index)));
 
       _undo.stop();
       _inUpdate = false;
