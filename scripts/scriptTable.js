@@ -34,7 +34,6 @@ var dmz =
          }
        , dmz.main.window() // _form
        )
-
   ;
 
 self.shutdown = function () { dmz.main.removeDock(DockName); };
@@ -44,7 +43,7 @@ function (name, handle, script, file, scriptHandle) {
 
    var item = _table.add(
       [handle, name, script, file],
-      { handle: handle, script: scriptHandle},
+      {handle: handle, script: scriptHandle},
       0);
 
    if (item && (name === self.name)) { item.disabled(true); }
