@@ -9,6 +9,7 @@
    <state name="Selected"/>
    <state name="Highlight"/>
    <object-type name="Tool"/>
+   <object-type name="State Node" parent="Tool"/>
    <object-type name="Tool Link Node" parent="Tool">
       <canvas-object/>
    </object-type>

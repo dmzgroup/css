@@ -20,6 +20,7 @@
    <path value="../js/scripts"/>
    <instance name="scriptTable"/>
    <instance name="attackScripts"/>
+   <instance name="attackLog"/>
    <instance name="objectInit"/>
    <instance name="objectInspector"/>
    <instance name="computerInspector"/>

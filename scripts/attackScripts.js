@@ -1,5 +1,6 @@
 var dmz =
-       { archive: require("dmz/components/archive")
+       { attack: require("attackAPI")
+       , archive: require("dmz/components/archive")
        , file: require("dmz/system/file")
        , fileDialog: require("dmz/ui/fileDialog")
        , io: require("dmz/runtime/configIO")
@@ -23,6 +24,7 @@ var dmz =
   , _playMode = false
   , _exports = {}
   , _form = dmz.uiLoader.load("AttackScripts")
+  , _startButton = _form.lookup("startButton")
   , _mb = dmz.messageBox.create
        ( { type: dmz.messageBox.Warn
          , text: "Script already loaded"
@@ -83,12 +85,33 @@ _compile_script = function (item) {
    else if (item) { _list.takeItem(item); }
 };
 
-_form.observe(self, "startButton", "clicked", function (button) {
+_startButton.observe(self, "clicked", function (button) {
 
-   if (_playMode) { button.text("Start"); }
-   else { button.text("Stop"); }
+   if (_playMode) { button.text("Start"); dmz.attack.controlAPI.stop(); }
+   else { button.text("Stop"); dmz.attack.controlAPI.start(); }
 
    _playMode = !_playMode;
+});
+
+_form.observe(self, "resetButton", "clicked", function (button) {
+
+   var count = _list.count()
+     , item
+     , data
+     , index = 0
+     ;
+
+   _startButton.text("Start");
+   _playMode = false;
+   dmz.attack.controlAPI.stop();
+
+   for (index= 0; index < count; index++) {
+
+      item = _list.item(index);
+
+      if (item) { _compile_script(item); }
+   }
+
 });
 
 _form.observe(self, "addButton", "clicked", function () {
@@ -132,6 +155,7 @@ _form.observe(self, "addButton", "clicked", function () {
 
                      data.script = dmz.file.read(file); 
                      _compile_script(found);
+                     _list.addItem(found.text(), found.data());
                   }
                }
             });
@@ -244,6 +268,7 @@ _exports.clear = function () {
    }
 
    _list.clear();
+   attack.controlAPI.stop();
 };
 
 dmz.module.publish(self, _exports);

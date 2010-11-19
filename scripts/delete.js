@@ -18,7 +18,7 @@ dmz.messaging.subscribe(self, "Object_Delete_Message",  function (data) {
 
    if (handle) {
 
-self.log.error ("delete: ", handle);
+      // self.log.error ("delete: ", handle);
 
       if (dmz.object.isObject(handle)) {
 
