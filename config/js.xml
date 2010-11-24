@@ -35,6 +35,7 @@
    <instance name="link"/>
    <instance name="delete"/>
    <instance name="highlight"/>
+   <instance name="infected"/>
 </javascript>
 </dmz>
 

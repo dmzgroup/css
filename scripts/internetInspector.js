@@ -69,7 +69,10 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
       module.addInit(self, InternetType, function (handle, type) {
 
-         dmz.object.text(handle, dmz.cssConst.IPVAttr, "4");
+         if (!dmz.object.text(handle, dmz.cssConst.IPVAttr)) {
+
+            dmz.object.text(handle, dmz.cssConst.IPVAttr, "4");
+         }
       }); 
    }
 });

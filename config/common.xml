@@ -12,9 +12,9 @@
    <plugin name="dmzObjectPluginCleanup" scope="cleanup"/>
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginList"/>
+   <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
 <!--
    <plugin name="dmzJsPluginObserver"/>
-   <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
    <plugin name="dmzQtPluginMessageInspector" unique="message-inspector"/>
    <plugin name="dmzPluginMsgDump"/>
    <plugin name="dmzObjectPluginDump"/>

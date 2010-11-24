@@ -63,10 +63,13 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
       module.addInit(self, NodeType, function (handle, type) {
 
-         dmz.object.text(
-            handle,
-            dmz.cssConst.NameAttr,
-            type.name() + module.counter());
+         if (!dmz.object.text( handle, dmz.cssConst.NameAttr)) {
+
+            dmz.object.text(
+               handle,
+               dmz.cssConst.NameAttr,
+               type.name() + module.counter());
+         }
       });
    }
 });

@@ -103,13 +103,17 @@ _form.observe(self, "resetButton", "clicked", function (button) {
 
    _startButton.text("Start");
    _playMode = false;
-   dmz.attack.controlAPI.stop();
+   dmz.attack.controlAPI.reset();
 
    for (index= 0; index < count; index++) {
 
       item = _list.item(index);
 
-      if (item) { _compile_script(item); }
+      if (item) {
+
+         _compile_script(item);
+         _list.addItem(item.text(), item.data());
+      }
    }
 
 });
@@ -209,13 +213,16 @@ _exports.load = function (file) {
 
    if (list) {
 
-      list.forEach(function(item) {
+      list.forEach(function(data) {
 
-         var script = dmz.zip.read(file, item);
+         var script = dmz.zip.read(file, data)
+           , item
+           ;
 
          if (script) {
 
-            _list.addItem(item, {script: script});
+            item = _list.addItem(data, {script: script});
+            _compile_script(item);
          }
       });
    }
@@ -240,7 +247,6 @@ _exports.save = function () {
          result.push({name: item.text(), data: item.data().script});
       }
    }
-
 
    result.push({name: ListFileName, data: JSON.stringify(list)});
 
@@ -268,7 +274,9 @@ _exports.clear = function () {
    }
 
    _list.clear();
-   attack.controlAPI.stop();
+   dmz.attack.controlAPI.stop();
+   _startButton.text("Start");
+   _playMode = false;
 };
 
 dmz.module.publish(self, _exports);

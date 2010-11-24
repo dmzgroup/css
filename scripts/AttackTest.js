@@ -1,15 +1,42 @@
 var _attack = require("attackAPI")
-  , count = 0
+  , _count = 0
+  , _start
   ;
 
-self.log.error("LOADED");
+_attack.log(self, "Loaded");
+
+_attack.start(self, function () {
+
+   _start = _attack.namedMalware("Start");
+   _attack.log(self, "Start: " + _start);
+});
+
+_attack.reset(self, function () {
+
+   _count = 0;
+});
 
 _attack.timeSlice(self, function (time) {
 
-  self.log.error(time);
   _attack.log(self, time);
 
-  count += time;
+  _count += time;
 
-//  if (count > 10) { foo.bar(); }
+  if ((_count > 3) && _start) {
+
+     _attack.links(_start).forEach(function(link) {
+
+        var state = _attack.state(link, self.name);
+
+        if (state) { _attack.infect(state); }
+     });
+
+     _start = undefined;
+  }
+});
+
+_attack.stop(self, function () {
+
+   _start = undefined;
+   _attack.log(self, "Stop");
 });

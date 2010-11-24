@@ -228,12 +228,18 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
          if (list) { os = list[0]; }
 
-         dmz.object.text(
-            handle,
-            dmz.cssConst.NameAttr,
-            type.name() + module.counter());
+         if (!dmz.object.text(handle, dmz.cssConst.NameAttr)) {
 
-         if (os) { dmz.object.text(handle, dmz.cssConst.OSAttr, os); }
+            dmz.object.text(
+               handle,
+               dmz.cssConst.NameAttr,
+               type.name() + module.counter());
+         }
+
+         if (!dmz.object.text(handle, dmz.cssConst.OSAttr)) {
+
+            if (os) { dmz.object.text(handle, dmz.cssConst.OSAttr, os); }
+         }
       }); 
    }
 });
