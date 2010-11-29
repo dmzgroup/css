@@ -115,7 +115,36 @@ _form.observe(self, "resetButton", "clicked", function (button) {
          _list.addItem(item.text(), item.data());
       }
    }
+});
 
+_form.observe(self, "exportButton", "clicked", function () {
+
+   var item = _list.currentItem()
+     , file
+     , split
+     , data
+     ;
+
+   if (item) {
+
+      file = dmz.fileDialog.getSaveFileName(
+         { caption: "Export attack script file", filter: "JavaScript File (*.js)" },
+         _form);
+
+      data = item.data();
+   }
+
+   if (file && data && data.script) {
+
+      split = dmz.file.split(file);
+
+      if (split) {
+
+         if (split.ext !== FileExt) { file = file + FileExt; }
+      }
+
+      dmz.file.write(file, data.script);
+   }
 });
 
 _form.observe(self, "addButton", "clicked", function () {
