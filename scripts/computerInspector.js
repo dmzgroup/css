@@ -144,7 +144,7 @@ _form.observe(self, "addButton", "clicked", function () {
             if (handle) {
 
                dmz.object.activate(handle);
-               dmz.object.link(dmz.cssConst.ServiceAttr, _object, handle);
+               dmz.object.link(dmz.cssConst.ServiceLink, _object, handle);
                _serviceList.addItem(type.name(), handle);
             }
          }
@@ -179,7 +179,7 @@ dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
            , type = dmz.object.type(handle)
-           , services = dmz.object.subLinks(handle, dmz.cssConst.ServiceAttr);
+           , services = dmz.object.subLinks(handle, dmz.cssConst.ServiceLink);
            ;
 
          _undo.clear();

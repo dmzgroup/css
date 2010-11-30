@@ -114,7 +114,7 @@ exports.links = function (handle) {
 
 exports.services = function (handle) {
 
-   var list = dmz.object.subLinks(handle, dmz.consts.ServiceAttr);
+   var list = dmz.object.subLinks(handle, dmz.consts.ServiceLink);
 
    if (!list) { list = []; }
 
@@ -186,21 +186,6 @@ exports.infect = function (handle) {
      ;
 
    if (type && type.isOfType(StateType)) {
-
-      if (obj) { obj = obj[0]; }
-
-      if (obj) {
-
-         mask = dmz.object.state(obj);
-
-         if (!mask) { mask = dmz.mask.create(); }
-
-         if (mask) {
-
-            mask = mask.or(InfectedState);
-            dmz.object.state(obj, null, mask);
-         }
-      }
 
       if (!state) { state = dmz.mask.create(); }
 

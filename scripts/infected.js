@@ -44,3 +44,21 @@ dmz.object.unlink.observe(self, dmz.consts.StateLink, function (link, attr, supe
 
    _update(super);
 });
+
+dmz.object.state.observe(self, function (handle, attr, value, prev) {
+
+   var isSet = value ? value.contains(InfectedState) : false
+     , wasSet = prev ? prev.contains(InfectedState) : false
+     , parents
+     ;
+
+   if (isSet !== wasSet) {
+
+      parents = dmz.object.superLinks(handle, dmz.consts.StateLink);
+
+      if (parents) {
+
+         parents.forEach(function(obj) { _update(obj) });
+      }
+   }
+});
