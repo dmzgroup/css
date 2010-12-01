@@ -15,11 +15,21 @@ var dmz =
   , FileExt = ".csdf"
   // Functions
   , _reset
+  , _save
+  , _setCurrentFile
   // Variables
+  , _window = dmz.main.window()
+  , _title = _window.title()
   , _cleanup = dmz.messaging.create("CleanupObjectsMessage")
   , _saveAsAction
   , _attack
+  , _currentFile = null
   ;
+
+self.shutdown = function () {
+
+   _window.title(_title);
+};
 
 dmz.module.subscribe(self, "attackScripts", function (Mode, module) {
 
@@ -27,19 +37,49 @@ dmz.module.subscribe(self, "attackScripts", function (Mode, module) {
    else if (Mode === dmz.module.Deactivate) { _attack = undefined; }
 });
 
-_reset = function () {
+_setCurrentFile = function (file) {
 
+   if (file) { _window.title(_title + ": " + file); }
+   else { _window.title(_title); }
+   _currentFile = file;
+};
+
+_reset = function () {
+   
+   _setCurrentFile(null);
    _cleanup.send ();
    dmz.undo.reset ();
    if (_attack) { _attack.clear(); }
 };
 
-dmz.main.addMenu (self, "&File", "New", { shortcut: "new" }, function (obj) {
+_save = function (file) {
+
+   var archive
+     , list
+     ;
+
+   archive = dmz.archive.create();
+
+   if (archive) {
+
+      list = 
+         [ {name: dmz.zip.ManifestFileName, config: dmz.zip.manifest (CSSFile)}
+         , {name: CSSFile, config: archive}
+         ];
+
+      if (_attack) { list = list.concat(_attack.save()); }
+
+      if (dmz.zip.write(file, list)) { _setCurrentFile(file); }
+      else { self.log.error ("Failed to create file:", name); }
+   }
+};
+
+dmz.main.addMenu (self, "&File", "New", { shortcut: "new" }, function () {
    
    _reset ();
 });
 
-dmz.main.addMenu (self, "&File", "Open", { shortcut: "open" }, function (obj) {
+dmz.main.addMenu (self, "&File", "Open", { shortcut: "open" }, function () {
 
    var data
      , archive
@@ -65,7 +105,12 @@ dmz.main.addMenu (self, "&File", "Open", { shortcut: "open" }, function (obj) {
       if (data) {
 
          archive = data.get("dmz");
-         if (archive) { dmz.archive.process(undefined, archive[0]); }
+
+         if (archive) {
+
+            _setCurrentFile(file);
+            dmz.archive.process(undefined, archive[0]);
+         }
       }
       else { self.log.error("No archive read from file:", file); }
    }
@@ -74,13 +119,14 @@ dmz.main.addMenu (self, "&File", "Open", { shortcut: "open" }, function (obj) {
 
 dmz.main.addSeparator("&File");
 
-dmz.main.addMenu(self, "&File", "Save", { shortcut: "save" }, function (obj) {
+dmz.main.addMenu(self, "&File", "Save", { shortcut: "save" }, function () {
 
-   if (_saveAsAction) { _saveAsAction.trigger(); }
+   if (_currentFile) { _save(_currentFile); }
+   else if (_saveAsAction) { _saveAsAction.trigger(); }
 });
 
 _saveAsAction = dmz.main.addMenu(self, "&File", "Save As", { shortcut: "saveas" },
-function (obj) {
+function () {
 
    var archive
      , name
@@ -88,45 +134,24 @@ function (obj) {
      , list
      ;
 
-   archive = dmz.archive.create();
+   name = dmz.fileDialog.getSaveFileName(
+      { caption: "Save file", filter: "Data File (*.csdf)" },
+      dmz.main.window());
 
-   if (archive) {
+   if (name) {
 
-      name = dmz.fileDialog.getSaveFileName(
-         { caption: "Save file", filter: "Data File (*.csdf)" },
-         dmz.main.window());
+      split = dmz.file.split(name);
 
-      if (name) {
+      if (split && (split.ext != FileExt)) {
 
-         split = dmz.file.split(name);
+         name = name + FileExt;
 
-         if (split && (split.ext != FileExt)) {
+         if (dmz.file.valid(name)) {
 
-            name = name + FileExt;
-
-            if (dmz.file.valid(name)) {
-
-               self.log.warn("File:", name, "already exists.");
-            }
-         }
-
-         self.log.error(name);
-
-         list = 
-            [ {name: dmz.zip.ManifestFileName, config: dmz.zip.manifest (CSSFile)}
-            , {name: CSSFile, config: archive}
-            ];
-
-         if (_attack) { list = list.concat(_attack.save()); }
-
-self.log.warn(JSON.stringify(list));
-
-         if (!dmz.zip.write(name, list)) {
-
-            self.log.error ("Failed to create file:", name);
+            self.log.warn("File:", name, "already exists.");
          }
       }
-   }
-   else { self.log.error("No archive created"); }
 
+      _save(name);
+   }
 });
