@@ -187,13 +187,13 @@
    <object-type name="Service" parent="Software">
    </object-type>
    <object-type name="HTTP" parent="Service">
-      <service value="true"/>
+      <real-service value="true"/>
    </object-type>
    <object-type name="SSH" parent="Service">
-      <service value="true"/>
+      <real-service value="true"/>
    </object-type>
    <object-type name="SMTP" parent="Service">
-      <service value="true"/>
+      <real-service value="true"/>
    </object-type>
 </runtime>
 </dmz>
