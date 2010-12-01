@@ -3,11 +3,14 @@ var dmz =
       , defs: require("dmz/runtime/definitions")
       , mask: require("dmz/types/mask")
       , object: require("dmz/components/object")
+      , objectType: require("dmz/runtime/objectType")
       }
   // functions
   , _update
+  , _test
   // constants
   , InfectedState = dmz.defs.lookupState("Infected")
+  , ServiceType = dmz.objectType.lookup("Service")
   ;
 
 _update = function (handle) {
@@ -35,6 +38,21 @@ _update = function (handle) {
    dmz.object.state(handle, null, state);
 };
 
+_test = function (handle) {
+
+   var type = dmz.object.type(handle)
+     , parents
+     ;
+
+   if (type && type.isOfType(ServiceType)) {
+
+      parents = dmz.object.superLinks(handle, dmz.consts.ServiceLink);
+
+      if (parents) { parents.forEach(function(obj) { _update(obj); }); }
+   }
+   else { _update(handle); }
+};
+
 dmz.object.link.observe(self, dmz.consts.StateLink, function (link, attr, super, sub) {
 
    _update(super);
@@ -58,7 +76,7 @@ dmz.object.state.observe(self, function (handle, attr, value, prev) {
 
       if (parents) {
 
-         parents.forEach(function(obj) { _update(obj) });
+         parents.forEach(function(obj) { _test(obj) });
       }
    }
 });

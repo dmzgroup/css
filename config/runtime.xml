@@ -161,36 +161,39 @@
    <object-type name="OS" parent="Software">
    </object-type>
    <object-type name="Windows" parent="OS">
-      <support type="Computer"/>
-   </object-type>
-   <object-type name="Windows Mobile" parent="OS">
-      <support type="Phone"/>
+      <supported-platform object-type="Computer"/>
    </object-type>
    <object-type name="MacOS X" parent="OS">
-      <support type="Computer"/>
+      <supported-platform object-type="Computer"/>
    </object-type>
    <object-type name="iOS" parent="OS">
-      <support type="Phone"/>
-      <support type="Tablet"/>
+      <supported-platform object-type="Phone"/>
+      <supported-platform object-type="Tablet"/>
    </object-type>
    <object-type name="Android" parent="OS">
-      <support type="Phone"/>
-      <support type="Tablet"/>
+      <supported-platform object-type="Phone"/>
+      <supported-platform object-type="Tablet"/>
    </object-type>
-   <object-type name="WebOS" parent="OS">
-      <support type="Phone"/>
-      <support type="Tablet"/>
+   <object-type name="webOS" parent="OS">
+      <supported-platform object-type="Phone"/>
+      <supported-platform object-type="Tablet"/>
+   </object-type>
+   <object-type name="Windows Mobile" parent="OS">
+      <supported-platform object-type="Phone"/>
    </object-type>
    <object-type name="Linux" parent="OS">
-      <support type="Computer"/>
+      <supported-platform object-type="Computer"/>
    </object-type>
    <object-type name="Service" parent="Software">
    </object-type>
    <object-type name="HTTP" parent="Service">
+      <service value="true"/>
    </object-type>
    <object-type name="SSH" parent="Service">
+      <service value="true"/>
    </object-type>
    <object-type name="SMTP" parent="Service">
+      <service value="true"/>
    </object-type>
 </runtime>
 </dmz>

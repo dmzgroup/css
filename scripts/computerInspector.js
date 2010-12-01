@@ -11,9 +11,9 @@ var dmz =
   // Constants
   , OSType = dmz.objectType.lookup("OS")
   , ComputerType = dmz.objectType.lookup("Computer")
-  , PhoneType = dmz.objectType.lookup("Phone")
-  , TabletType = dmz.objectType.lookup("Tablet")
+  , ServiceType = dmz.objectType.lookup("Service")
   // Functions
+  , _initService
   , _initOS
   , _setOS
   , _getOS
@@ -31,14 +31,25 @@ var dmz =
   , _serviceList = _form.lookup("serviceList")
   ;
 
+_initService = function (type) {
+
+   var children = type.children()
+     ;
+
+
+   if (type.config().boolean("real-service.value")) { _serviceBox.addItem(type.name()); }
+
+   if (children) { children.forEach(_initService); }
+};
+
 _initOS = function (type) {
 
     var children = type.children()
-     ;
+      ;
 
-   type.config().get("support").forEach(function (config) {
+   type.config().get("supported-platform").forEach(function (config) {
 
-      var support = config.objectType("type")
+      var support = config.objectType("object-type")
         , name
         , list
         ;
@@ -61,7 +72,7 @@ _initOS = function (type) {
    if (children) { children.forEach(_initOS); }
 };
 
-(function () { _initOS(OSType); })();
+(function () { _initOS(OSType); _initService(ServiceType); })();
 
 _setOS = function (type) {
 
