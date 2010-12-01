@@ -72,7 +72,12 @@ _initOS = function (type) {
    if (children) { children.forEach(_initOS); }
 };
 
-(function () { _initOS(OSType); _initService(ServiceType); })();
+(function () {
+
+   _initOS(OSType);
+   _initService(ServiceType);
+
+})();
 
 _setOS = function (type) {
 
