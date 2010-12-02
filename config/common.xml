@@ -11,8 +11,8 @@
    <plugin name="dmzObjectPluginCleanup" scope="cleanup"/>
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginList"/>
-   <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
 <!--
+   <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
    <plugin name="dmzArchivePluginAutoSave"/>
    <plugin name="dmzJsPluginObserver"/>
    <plugin name="dmzQtPluginMessageInspector" unique="message-inspector"/>
