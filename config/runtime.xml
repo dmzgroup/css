@@ -8,7 +8,9 @@
    <state name="No Linking"/>
    <state name="Selected"/>
    <state name="Highlight"/>
+   <state name="Infected"/>
    <object-type name="Tool"/>
+   <object-type name="State Node" parent="Tool"/>
    <object-type name="Tool Link Node" parent="Tool">
       <canvas-object/>
    </object-type>
@@ -156,15 +158,42 @@
          </template>
       </canvas-object-basic>
    </object-type>
+   <object-type name="OS" parent="Software">
+   </object-type>
+   <object-type name="Windows" parent="OS">
+      <supported-platform object-type="Computer"/>
+   </object-type>
+   <object-type name="MacOS X" parent="OS">
+      <supported-platform object-type="Computer"/>
+   </object-type>
+   <object-type name="iOS" parent="OS">
+      <supported-platform object-type="Phone"/>
+      <supported-platform object-type="Tablet"/>
+   </object-type>
+   <object-type name="Android" parent="OS">
+      <supported-platform object-type="Phone"/>
+      <supported-platform object-type="Tablet"/>
+   </object-type>
+   <object-type name="webOS" parent="OS">
+      <supported-platform object-type="Phone"/>
+      <supported-platform object-type="Tablet"/>
+   </object-type>
+   <object-type name="Windows Mobile" parent="OS">
+      <supported-platform object-type="Phone"/>
+   </object-type>
+   <object-type name="Linux" parent="OS">
+      <supported-platform object-type="Computer"/>
+   </object-type>
    <object-type name="Service" parent="Software">
    </object-type>
    <object-type name="HTTP" parent="Service">
-   </object-type>
-   <object-type name="FTP" parent="Service">
+      <real-service value="true"/>
    </object-type>
    <object-type name="SSH" parent="Service">
+      <real-service value="true"/>
    </object-type>
-   <object-type name="Telnet" parent="Service">
+   <object-type name="SMTP" parent="Service">
+      <real-service value="true"/>
    </object-type>
 </runtime>
 </dmz>

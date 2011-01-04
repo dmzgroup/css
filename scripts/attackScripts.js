@@ -1,5 +1,6 @@
 var dmz =
-       { archive: require("dmz/components/archive")
+       { attack: require("attackAPI")
+       , archive: require("dmz/components/archive")
        , file: require("dmz/system/file")
        , fileDialog: require("dmz/ui/fileDialog")
        , io: require("dmz/runtime/configIO")
@@ -23,6 +24,7 @@ var dmz =
   , _playMode = false
   , _exports = {}
   , _form = dmz.uiLoader.load("AttackScripts")
+  , _startButton = _form.lookup("startButton")
   , _mb = dmz.messageBox.create
        ( { type: dmz.messageBox.Warn
          , text: "Script already loaded"
@@ -83,12 +85,66 @@ _compile_script = function (item) {
    else if (item) { _list.takeItem(item); }
 };
 
-_form.observe(self, "startButton", "clicked", function (button) {
+_startButton.observe(self, "clicked", function (button) {
 
-   if (_playMode) { button.text("Start"); }
-   else { button.text("Stop"); }
+   if (_playMode) { button.text("Start"); dmz.attack.controlAPI.stop(); }
+   else { button.text("Stop"); dmz.attack.controlAPI.start(); }
 
    _playMode = !_playMode;
+});
+
+_form.observe(self, "resetButton", "clicked", function (button) {
+
+   var count = _list.count()
+     , item
+     , data
+     , index = 0
+     ;
+
+   _startButton.text("Start");
+   _playMode = false;
+   dmz.attack.controlAPI.reset();
+
+   for (index= 0; index < count; index++) {
+
+      item = _list.item(index);
+
+      if (item) {
+
+         _compile_script(item);
+         _list.addItem(item.text(), item.data());
+      }
+   }
+});
+
+_form.observe(self, "exportButton", "clicked", function () {
+
+   var item = _list.currentItem()
+     , file
+     , split
+     , data
+     ;
+
+   if (item) {
+
+      file = dmz.fileDialog.getSaveFileName(
+         { caption: "Export attack script file", filter: "JavaScript File (*.js)" },
+         _form);
+
+      data = item.data();
+   }
+
+   if (file && data && data.script) {
+
+      split = dmz.file.split(file);
+
+      if (split) {
+
+         if (split.ext !== FileExt) { file = file + FileExt; }
+      }
+
+      dmz.file.write(file, data.script);
+   }
 });
 
 _form.observe(self, "addButton", "clicked", function () {
@@ -132,6 +188,7 @@ _form.observe(self, "addButton", "clicked", function () {
 
                      data.script = dmz.file.read(file); 
                      _compile_script(found);
+                     _list.addItem(found.text(), found.data());
                   }
                }
             });
@@ -185,13 +242,16 @@ _exports.load = function (file) {
 
    if (list) {
 
-      list.forEach(function(item) {
+      list.forEach(function(data) {
 
-         var script = dmz.zip.read(file, item);
+         var script = dmz.zip.read(file, data)
+           , item
+           ;
 
          if (script) {
 
-            _list.addItem(item, {script: script});
+            item = _list.addItem(data, {script: script});
+            _compile_script(item);
          }
       });
    }
@@ -216,7 +276,6 @@ _exports.save = function () {
          result.push({name: item.text(), data: item.data().script});
       }
    }
-
 
    result.push({name: ListFileName, data: JSON.stringify(list)});
 
@@ -244,6 +303,9 @@ _exports.clear = function () {
    }
 
    _list.clear();
+   dmz.attack.controlAPI.stop();
+   _startButton.text("Start");
+   _playMode = false;
 };
 
 dmz.module.publish(self, _exports);

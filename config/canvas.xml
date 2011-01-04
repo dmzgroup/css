@@ -75,6 +75,11 @@
             <group name="link mode">
                <image name="not ok" resource="not ok" isect="false"/>
             </group>
+            <group name="infected">
+               <image name="infected" resource="infected badge" isect="false">
+                  <translate name="node" x="1" y="-1"/>
+               </image>
+            </group>
          </items>
          <text>
             <item name="name" attribute="Name"/>
@@ -94,6 +99,9 @@
             </state>
             <state name="No Linking" group="link mode">
                <item name="not ok"/>
+            </state>
+            <state name="Infected" group="infected">
+               <item name="infected"/>
             </state>
          </switch>
       </template>

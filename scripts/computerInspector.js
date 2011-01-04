@@ -9,10 +9,12 @@ var dmz =
        , undo: require("inspectorUndo")
        }
   // Constants
+  , OSType = dmz.objectType.lookup("OS")
   , ComputerType = dmz.objectType.lookup("Computer")
-  , PhoneType = dmz.objectType.lookup("Phone")
-  , TabletType = dmz.objectType.lookup("Tablet")
+  , ServiceType = dmz.objectType.lookup("Service")
   // Functions
+  , _initService
+  , _initOS
   , _setOS
   , _getOS
   // Variables
@@ -29,42 +31,52 @@ var dmz =
   , _serviceList = _form.lookup("serviceList")
   ;
 
+_initService = function (type) {
+
+   var children = type.children()
+     ;
+
+
+   if (type.config().boolean("real-service.value")) { _serviceBox.addItem(type.name()); }
+
+   if (children) { children.forEach(_initService); }
+};
+
+_initOS = function (type) {
+
+    var children = type.children()
+      ;
+
+   type.config().get("supported-platform").forEach(function (config) {
+
+      var support = config.objectType("object-type")
+        , name
+        , list
+        ;
+
+      if (support) {
+
+         name = support.name();
+         list = _osTable[name];
+
+         if (!list) {
+
+            list = [];
+            _osTable[name] = list;
+         }
+ 
+         if (list) { list.push(type.name()); }
+      }
+   });
+
+   if (children) { children.forEach(_initOS); }
+};
+
 (function () {
 
-   _osTable[ComputerType.name()] =
-      [ "Windows 7"
-      , "Windows Vista"
-      , "Windows XP"
-      , "Mac OS X 10.6"
-      , "Mac OS X 10.5"
-      , "Mac OS X 10.4"
-      , "Linux"
-      , "Solaris"
-      , "Aix"
-      ];
+   _initOS(OSType);
+   _initService(ServiceType);
 
-   _osTable[PhoneType.name()] =
-      [ "Blackberry OS"
-      , "Android"
-      , "iOS 4"
-      , "Symbian"
-      , "WebOS"
-      , "Windows Phone 7"
-      , "Windows Mobile 6"
-      ];
-
-   _osTable[TabletType.name()] =
-      [ "iOS 4"
-      , "Android"
-      , "WebOS"
-      , "Windows 7"
-      , "Windows Embedded 7"
-      ];
-
-   _serviceBox.addItem("HTTP");
-   _serviceBox.addItem("FTP");
-   _serviceBox.addItem("SSH");
-   _serviceBox.addItem("Telnet");
 })();
 
 _setOS = function (type) {
@@ -118,6 +130,11 @@ _os.observe(self, "currentIndexChanged", function (index, widget) {
 
       dmz.object.text(_object, dmz.cssConst.OSAttr, _os.itemText(index));
 
+      dmz.object.altType(
+         _object,
+         dmz.cssConst.OSAttr,
+         dmz.objectType.lookup(_os.itemText(index)));
+
       _undo.stop();
       _inUpdate = false;
    }
@@ -143,7 +160,7 @@ _form.observe(self, "addButton", "clicked", function () {
             if (handle) {
 
                dmz.object.activate(handle);
-               dmz.object.link(dmz.cssConst.ServiceAttr, _object, handle);
+               dmz.object.link(dmz.cssConst.ServiceLink, _object, handle);
                _serviceList.addItem(type.name(), handle);
             }
          }
@@ -178,7 +195,7 @@ dmz.module.subscribe(self, "objectInspector", function (Mode, module) {
          var name = dmz.object.text(handle, dmz.cssConst.NameAttr)
            , os = dmz.object.text(handle, dmz.cssConst.OSAttr)
            , type = dmz.object.type(handle)
-           , services = dmz.object.subLinks(handle, dmz.cssConst.ServiceAttr);
+           , services = dmz.object.subLinks(handle, dmz.cssConst.ServiceLink);
            ;
 
          _undo.clear();
@@ -227,12 +244,18 @@ dmz.module.subscribe(self, "objectInit", function (Mode, module) {
 
          if (list) { os = list[0]; }
 
-         dmz.object.text(
-            handle,
-            dmz.cssConst.NameAttr,
-            type.name() + module.counter());
+         if (!dmz.object.text(handle, dmz.cssConst.NameAttr)) {
 
-         if (os) { dmz.object.text(handle, dmz.cssConst.OSAttr, os); }
+            dmz.object.text(
+               handle,
+               dmz.cssConst.NameAttr,
+               type.name() + module.counter());
+         }
+
+         if (!dmz.object.text(handle, dmz.cssConst.OSAttr)) {
+
+            if (os) { dmz.object.text(handle, dmz.cssConst.OSAttr, os); }
+         }
       }); 
    }
 });

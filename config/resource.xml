@@ -36,6 +36,7 @@
    <resource name="workstation highlight" file="WorkstationInvert.svg"/>
    <resource name="workstation select" file="WorkstationSelect.svg"/>
    <resource name="not ok" file="X.svg"/>
+   <resource name="infected badge" file="Infected.svg"/>
 </resource-map>
 </runtime>
 </dmz>

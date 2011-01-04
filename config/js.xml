@@ -20,13 +20,16 @@
    <path value="../js/scripts"/>
    <instance name="scriptTable"/>
    <instance name="attackScripts"/>
+   <instance name="attackLog"/>
    <instance name="objectInit"/>
    <instance name="objectInspector"/>
    <instance name="computerInspector"/>
    <instance name="internetInspector"/>
    <instance name="switchInspector"/>
    <instance name="malwareInspector"/>
+<!--
    <instance name="serviceInspector"/>
+-->
    <instance name="fileMenu"/>
    <instance name="editMenu"/>
    <instance name="create"/>
@@ -34,6 +37,7 @@
    <instance name="link"/>
    <instance name="delete"/>
    <instance name="highlight"/>
+   <instance name="infected"/>
 </javascript>
 </dmz>
 

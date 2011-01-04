@@ -13,21 +13,41 @@ dmz.messaging.subscribe(self, "Object_Delete_Message",  function (data) {
 
    var handle = dmz.data.unwrapHandle(data)
      , services
+     , states
      , undo
      ;
 
    if (handle) {
 
-self.log.error ("delete: ", handle);
+      // self.log.error ("delete: ", handle);
 
       if (dmz.object.isObject(handle)) {
 
          undo = dmz.undo.startRecord("Delete Object");
-         services = dmz.object.subLinks(handle, dmz.cssConst.ServiceAttr);
+         services = dmz.object.subLinks(handle, dmz.cssConst.ServiceLink);
+         states = dmz.object.subLinks(handle, dmz.cssConst.StateLink);
 
          if (services) {
 
-            services.forEach(function (sub) { dmz.object.destroy(sub); });
+            services.forEach(function (sub) {
+
+               var serviceStates = dmz.object.subLinks(sub, dmz.cssConst.StateLink);
+
+               if (serviceStates) {
+
+                  serviceStates.forEach(function (subServ) {
+
+                     dmz.object.destroy(subServ);
+                  });
+               }
+
+               dmz.object.destroy(sub);
+            });
+         }
+
+         if (states) {
+
+            states.forEach(function (sub) { dmz.object.destroy(sub); });
          }
 
          dmz.object.destroy(handle);

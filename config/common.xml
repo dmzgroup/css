@@ -3,7 +3,6 @@
 <plugin-list>
    <plugin name="dmzArchiveModuleBasic" scope="archive-module"/>
    <plugin name="dmzArchivePluginAutoLoad"/>
-   <plugin name="dmzArchivePluginAutoSave"/>
    <plugin name="dmzArchivePluginObject" scope="archive-object"/>
    <plugin name="dmzArchivePluginUndo"/>
    <plugin name="dmzObjectModuleBasic"/>
@@ -13,8 +12,9 @@
    <plugin name="dmzRenderModulePickBasic"/>
    <plugin name="dmzQtPluginList"/>
 <!--
-   <plugin name="dmzJsPluginObserver"/>
    <plugin name="dmzQtPluginObjectInspector" unique="object-inspector"/>
+   <plugin name="dmzArchivePluginAutoSave"/>
+   <plugin name="dmzJsPluginObserver"/>
    <plugin name="dmzQtPluginMessageInspector" unique="message-inspector"/>
    <plugin name="dmzPluginMsgDump"/>
    <plugin name="dmzObjectPluginDump"/>
@@ -28,11 +28,11 @@
    <archive-scope>
       <string value="archive"/>
    </archive-scope>
-   <archive>
+   <filter>
       <object-type-set>
          <object-type name="Tool"/>
       </object-type-set>
-   </archive>
+   </filter>
 </archive-object>
 <cleanup>
    <cleanup>
